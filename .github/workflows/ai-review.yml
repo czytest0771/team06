@@ -44,6 +44,6 @@ jobs:
         run: |
           git config user.name "Bee Vibe Bot"
           git config user.email "bot@lifebee-vibe-coding.local"
-          git add .bee-state/ai-review-state.json
+          git add -f .bee-state/ai-review-state.json
           git commit -m "chore: AI Review 配额更新" || true
           git push origin main || true
