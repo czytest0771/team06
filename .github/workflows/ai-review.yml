@@ -1,0 +1,49 @@
+name: AI Review (Layer 2)
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  review:
+    if: |
+      github.event.issue.pull_request &&
+      contains(github.event.comment.body, '/review')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install openai pyyaml
+
+      - name: 从 PR 标签推断 milestone
+        id: ms
+        run: |
+          MILESTONE=$(gh pr view ${{ github.event.issue.number }} --json labels -q '.labels[].name' | grep -E '^M[0-9]+' | head -1 | tr 'A-Z' 'a-z')
+          echo "milestone=${MILESTONE:-m3}" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 跑 AI review
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: |
+          python scripts/ai_review.py \
+            --milestone ${{ steps.ms.outputs.milestone }} \
+            --team-id "$(basename $GITHUB_REPOSITORY)" \
+            --repo-dir . > /tmp/review.md
+
+      - name: 把 review 发为 PR 评论
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr comment ${{ github.event.issue.number }} --body-file /tmp/review.md
+
+      - name: Commit 配额状态
+        run: |
+          git config user.name "Bee Vibe Bot"
+          git config user.email "bot@lifebee-vibe-coding.local"
+          git add .bee-state/ai-review-state.json
+          git commit -m "chore: AI Review 配额更新" || true
+          git push origin main || true
