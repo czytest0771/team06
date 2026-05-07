@@ -41,7 +41,7 @@ jobs:
         run: |
           git config user.name "Bee Vibe Bot"
           git config user.email "bot@lifebee-vibe-coding.local"
-          git add README.md .bee-state/milestone-results.json
+          git add -f README.md .bee-state/milestone-results.json
           if git diff --staged --quiet; then
             echo "无变更需 commit"
           else
