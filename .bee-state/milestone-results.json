@@ -1,0 +1,37 @@
+{
+  "m1": {
+    "passed": false,
+    "message": "team_name 不能为空",
+    "details": null
+  },
+  "m3": {
+    "passed": true,
+    "message": "M3 通过：5 必填章节齐全 + marker 存在",
+    "details": null
+  },
+  "m4": {
+    "passed": true,
+    "message": "M4 通过：4 个 Phase",
+    "details": null
+  },
+  "m7": {
+    "passed": false,
+    "message": "至少需要 2 个分支（含 main + 1 个 feature/dev 分支），当前: ['main']",
+    "details": null
+  },
+  "m8a": {
+    "passed": true,
+    "message": "M8a 测试文档 通过：356 字符",
+    "details": null
+  },
+  "m8b": {
+    "passed": false,
+    "message": "M8b AI 协作记录 字数不足（当前 234，要求 ≥ 500）",
+    "details": null
+  },
+  "m8c": {
+    "passed": false,
+    "message": "M8c 复盘文档 字数不足（当前 143，要求 ≥ 500）",
+    "details": null
+  }
+}
