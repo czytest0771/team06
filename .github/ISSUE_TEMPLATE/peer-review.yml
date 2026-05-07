@@ -1,0 +1,65 @@
+name: Peer Review (互评)
+description: Track A · 评其它队的 design.md + plan.md
+title: "[Peer Review] {{reviewer_team}} → {{target_team}}"
+labels: ["peer-review", "round-1"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 你正在评审 **{{target_team}}** 的文档
+
+        请先阅读他们的 `docs/design.md` 和 `docs/plan.md`，然后按下方填写评分。
+
+        **截止时间：5/15 23:59**
+
+  - type: input
+    id: target_team
+    attributes:
+      label: 被评队
+      description: 你正在评审的队
+    validations:
+      required: true
+
+  - type: input
+    id: reviewer_team
+    attributes:
+      label: 评审方（你的队）
+      description: 你的队
+    validations:
+      required: true
+
+  - type: dropdown
+    id: clarity
+    attributes:
+      label: 清晰度（1-10）
+      description: design.md / plan.md 整体表达是否清晰、易读
+      options: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feasibility
+    attributes:
+      label: 可行性（1-10）
+      description: 工作量与 5/15 截止匹配吗？技术方案合理吗？
+      options: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+    validations:
+      required: true
+
+  - type: dropdown
+    id: innovation
+    attributes:
+      label: 创新性（1-10）
+      description: 创意与思路是否有亮点
+      options: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+    validations:
+      required: true
+
+  - type: textarea
+    id: comment
+    attributes:
+      label: 评语（≥80 字）
+      description: 具体说明哪里好、哪里建议改进
+      placeholder: "我觉得 design.md 第 2 节…"
+    validations:
+      required: true

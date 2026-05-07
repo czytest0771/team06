@@ -1,0 +1,67 @@
+name: Milestone Check (Layer 1)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装依赖
+        run: pip install pyyaml
+
+      - name: 跑里程碑校验
+        id: checks
+        run: |
+          python scripts/check_milestones.py --milestone all > milestone-results.json || true
+          cat milestone-results.json
+
+      - name: 更新 README 状态徽章
+        run: python scripts/update_readme.py --states milestone-results.json
+
+      - name: 持久化里程碑状态供 cron 同步
+        if: github.event_name == 'push'
+        run: |
+          mkdir -p .bee-state
+          cp milestone-results.json .bee-state/milestone-results.json
+
+      - name: Commit README + 状态文件
+        if: github.event_name == 'push'
+        run: |
+          git config user.name "Bee Vibe Bot"
+          git config user.email "bot@lifebee-vibe-coding.local"
+          git add README.md .bee-state/milestone-results.json
+          if git diff --staged --quiet; then
+            echo "无变更需 commit"
+          else
+            git commit -m "chore: 自动更新 milestone 状态（README + .bee-state/）"
+            git push origin main
+          fi
+
+      - name: 在 commit 上发评论
+        if: github.event_name == 'push'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const results = JSON.parse(fs.readFileSync('milestone-results.json', 'utf8'));
+            const lines = Object.entries(results).map(([m, r]) =>
+              `${r.passed ? '✅' : '❌'} **${m.toUpperCase()}**: ${r.message}`
+            );
+            await github.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha,
+              body: `## 🐝 Milestone Check 结果\n\n${lines.join('\n')}`
+            });
