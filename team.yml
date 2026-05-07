@@ -1,7 +1,7 @@
 # team.yml — M1 必填，由参赛队员手动填写
 # GitHub Action `milestone-check.yml` 会自动校验本文件
 
-team_id: team-XX               # 系统分配，请勿修改（如 team-01）
+team_id: team-06               # 系统分配，请勿修改（如 team-01）
 team_number: ""                # 中文组号，如 "一组"
 team_name: ""                  # 队员自取的队名，例如 "蜂巢"
 pioneer_lead: ""               # 队长姓名（必填）
