@@ -1,8 +1,14 @@
 {
   "m1": {
-    "passed": false,
-    "message": "team_name 不能为空",
-    "details": null
+    "passed": true,
+    "message": "M1 通过：3 人，2 个不同办公室",
+    "details": {
+      "members_count": 3,
+      "offices": [
+        "深圳",
+        "长沙"
+      ]
+    }
   },
   "m3": {
     "passed": true,
