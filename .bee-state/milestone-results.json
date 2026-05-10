@@ -21,8 +21,8 @@
     "details": null
   },
   "m7": {
-    "passed": false,
-    "message": "至少需要 2 个分支（含 main + 1 个 feature/dev 分支），当前: ['main']",
+    "passed": true,
+    "message": "M7+ 通过：分支 ['feature/docs-grill-update', 'main']",
     "details": null
   },
   "m8a": {
