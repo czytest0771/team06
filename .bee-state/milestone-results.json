@@ -5,8 +5,8 @@
     "details": {
       "members_count": 3,
       "offices": [
-        "深圳",
-        "长沙"
+        "长沙",
+        "深圳"
       ]
     }
   },
@@ -17,7 +17,7 @@
   },
   "m4": {
     "passed": true,
-    "message": "M4 通过：4 个 Phase",
+    "message": "M4 通过：6 个 Phase",
     "details": null
   },
   "m7": {
