@@ -5,8 +5,8 @@
     "details": {
       "members_count": 3,
       "offices": [
-        "长沙",
-        "深圳"
+        "深圳",
+        "长沙"
       ]
     }
   },
@@ -26,18 +26,18 @@
     "details": null
   },
   "m8a": {
-    "passed": true,
-    "message": "M8a 测试文档 通过：356 字符",
+    "passed": false,
+    "message": "M8a 测试文档 与原始模板完全一致（未实际编辑）",
     "details": null
   },
   "m8b": {
     "passed": false,
-    "message": "M8b AI 协作记录 字数不足（当前 234，要求 ≥ 500）",
+    "message": "M8b AI 协作记录 与原始模板完全一致（未实际编辑）",
     "details": null
   },
   "m8c": {
     "passed": false,
-    "message": "M8c 复盘文档 字数不足（当前 143，要求 ≥ 500）",
+    "message": "M8c 复盘文档 与原始模板完全一致（未实际编辑）",
     "details": null
   }
 }
