@@ -6,9 +6,30 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
+import hashlib
 import re
 import subprocess
 import yaml
+
+
+# 已知模板 hash 黑名单：team 文件 SHA256 命中即视为"未实际编辑"。
+# 包含 v1 旧模板（已下发到 10 team repo）+ v2 新骨架模板。
+TEMPLATE_HASH_BLACKLIST = {
+    "docs/test.md": {
+        "d1b41af478830ca7152044d05cea28665129fcc93fd8c93575ee56401e09dbf4",  # v1
+        "9dc9577fb2ffb8b45dbb86c70877ffba1bd8170880883261ea68cb34862063df",  # v2
+    },
+    "docs/ai-collab-log.md": {
+        "cdbe6cde0000cb73131d5baf90418e280fe3a0ff8fc1f3c7864a2f2c209a2db2",  # v1
+        "9e71da33dc1c7899d6eabffcf28bd8e84132a38d599bb0ff1bdb24fa86ad9fd9",  # v2
+    },
+    "docs/retrospective.md": {
+        "aa2dbea5b30f38dcdb28f4d7ec640e0772c298fdd752d28a7863f11105117a50",  # v1
+        "4a3e3a136dc54cdbcaf3d7da65b8154d4725a21c07a848d13dd6bbace916531a",  # v2
+    },
+}
+
+TEMPLATE_SENTINEL = "TEMPLATE_UNTOUCHED"
 
 
 @dataclass
@@ -142,11 +163,37 @@ def check_m7_branches(repo_dir: Path) -> MilestoneStatus:
         return MilestoneStatus(False, f"git branch 命令失败: {e}")
 
 
-def check_doc_min_length(path: Path, min_chars: int, label: str) -> MilestoneStatus:
-    """通用文档字数校验（M8a/b/c）。"""
+def check_doc_min_length(
+    path: Path, min_chars: int, label: str, rel_path: str | None = None
+) -> MilestoneStatus:
+    """通用文档字数校验（M8a/b/c）。
+
+    判定顺序（任一失败即 fail）：
+    1. 文件存在
+    2. 不含 TEMPLATE_UNTOUCHED sentinel（防止只删字段不删标记）
+    3. SHA256 不命中模板 hash 黑名单（防止整篇照抄模板）
+    4. 字数 ≥ min_chars
+    """
     if not path.exists():
         return MilestoneStatus(False, f"{label} 不存在: {path}")
-    content = path.read_text(encoding="utf-8").strip()
+
+    raw = path.read_text(encoding="utf-8")
+
+    if TEMPLATE_SENTINEL in raw:
+        return MilestoneStatus(
+            False,
+            f"{label} 仍是模板（请删除顶部 `<!-- {TEMPLATE_SENTINEL} ... -->` 标记后再提交）",
+        )
+
+    if rel_path and rel_path in TEMPLATE_HASH_BLACKLIST:
+        digest = hashlib.sha256(raw.encode("utf-8")).hexdigest()
+        if digest in TEMPLATE_HASH_BLACKLIST[rel_path]:
+            return MilestoneStatus(
+                False,
+                f"{label} 与原始模板完全一致（未实际编辑）",
+            )
+
+    content = raw.strip()
     if len(content) < min_chars:
         return MilestoneStatus(
             False,
@@ -175,11 +222,11 @@ if __name__ == "__main__":
     if args.milestone in ("m7", "all"):
         results["m7"] = check_m7_branches(repo)
     if args.milestone in ("m8a", "all"):
-        results["m8a"] = check_doc_min_length(repo / "docs" / "test.md", 300, "M8a 测试文档")
+        results["m8a"] = check_doc_min_length(repo / "docs" / "test.md", 300, "M8a 测试文档", "docs/test.md")
     if args.milestone in ("m8b", "all"):
-        results["m8b"] = check_doc_min_length(repo / "docs" / "ai-collab-log.md", 500, "M8b AI 协作记录")
+        results["m8b"] = check_doc_min_length(repo / "docs" / "ai-collab-log.md", 500, "M8b AI 协作记录", "docs/ai-collab-log.md")
     if args.milestone in ("m8c", "all"):
-        results["m8c"] = check_doc_min_length(repo / "docs" / "retrospective.md", 500, "M8c 复盘文档")
+        results["m8c"] = check_doc_min_length(repo / "docs" / "retrospective.md", 500, "M8c 复盘文档", "docs/retrospective.md")
 
     out = {
         k: {"passed": v.passed, "message": v.message, "details": v.details}
