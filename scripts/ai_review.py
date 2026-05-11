@@ -69,25 +69,38 @@ def check_budget(repo_dir: Path, milestone: str) -> bool:
     return True
 
 
+MILESTONE_FILE_MAP = {
+    "m3":  ("docs/design.md",          "设计文档"),
+    "m4":  ("docs/plan.md",            "实施计划"),
+    "m8a": ("docs/test.md",            "测试文档"),
+    "m8b": ("docs/ai-collab-log.md",   "AI 协作记录"),
+    "m8c": ("docs/retrospective.md",   "复盘文档"),
+}
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--milestone", required=True, choices=["m3", "m4"])
+    ap.add_argument("--milestone", required=True, choices=sorted(MILESTONE_FILE_MAP.keys()))
     ap.add_argument("--team-id", required=True)
     ap.add_argument("--repo-dir", type=Path, default=Path("."))
+    ap.add_argument(
+        "--skip-budget",
+        action="store_true",
+        help="跳过配额检查（管理员侧 workflow_dispatch 用，不消耗 team 自己的 /review 名额）",
+    )
     args = ap.parse_args()
 
-    file_map = {
-        "m3": args.repo_dir / "docs" / "design.md",
-        "m4": args.repo_dir / "docs" / "plan.md",
-    }
-    fp = file_map[args.milestone]
+    rel_path, _doc_label = MILESTONE_FILE_MAP[args.milestone]
+    fp = args.repo_dir / rel_path
     if not fp.exists():
         print(f"❌ {fp} 不存在")
         sys.exit(1)
 
-    if not check_budget(args.repo_dir, args.milestone):
-        print(f"⚠️ {args.milestone} 配额已用完；跳过。")
-        sys.exit(0)
+    if not args.skip_budget:
+        if not check_budget(args.repo_dir, args.milestone):
+            print(f"⚠️ {args.milestone} 配额已用完；跳过。")
+            sys.exit(0)
 
     feedback = review(args.milestone, args.team_id, fp)
-    print(f"## 🤖 Bee AI Review · {args.milestone.upper()} · {args.team_id}\n\n{feedback}")
+    tag = " · [admin dispatch]" if args.skip_budget else ""
+    print(f"## 🤖 Bee AI Review · {args.milestone.upper()} · {args.team_id}{tag}\n\n{feedback}")
