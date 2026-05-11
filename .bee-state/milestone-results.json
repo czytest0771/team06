@@ -5,10 +5,15 @@
     "details": {
       "members_count": 3,
       "offices": [
-        "深圳",
-        "长沙"
+        "长沙",
+        "深圳"
       ]
     }
+  },
+  "m2": {
+    "passed": false,
+    "message": "brainstorm.md 至少 8 个 Q&A（当前 2 个）",
+    "details": null
   },
   "m3": {
     "passed": true,
@@ -20,7 +25,27 @@
     "message": "M4 通过：6 个 Phase",
     "details": null
   },
+  "m4_5": {
+    "passed": false,
+    "message": "docs/ui-mock/ 下没有非空设计稿文件",
+    "details": null
+  },
+  "m5": {
+    "passed": false,
+    "message": "src/ 下未找到源码文件（支持: .astro, .cjs, .htm, .html, .js, .jsx, .mjs, .svelte, .ts, .tsx, .vue）",
+    "details": null
+  },
+  "m6": {
+    "passed": false,
+    "message": "src/ 下未找到源码文件",
+    "details": null
+  },
   "m7": {
+    "passed": false,
+    "message": "src/ 下未找到源码文件，无法校验移动端适配",
+    "details": null
+  },
+  "m7_plus": {
     "passed": true,
     "message": "M7+ 通过：分支 ['feature/docs-grill-update', 'main']",
     "details": null
