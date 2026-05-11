@@ -13,21 +13,32 @@ PROMPT_TEMPLATE = """你是 BeeFintech Vibe Coding 比赛的 AI Reviewer。
 当前评审 Milestone: {milestone}
 当前评审 Team: {team_id}
 
-请阅读以下文件内容并给出 100-200 字的建设性反馈：
+请阅读以下文件内容并给出建设性反馈：
 
 ```
 {file_content}
 ```
 
-反馈格式：
-【整体】1-2 句总体评价
-【建议】2-3 个具体可行的改进点
-【评估】1-5 分可行性评分 + 一句话总结
+**输出格式（三段都必须有，缺一不可）：**
 
-要求：
+【整体】1-2 句总体评价（≤ 80 字）
+
+【建议】列 2-3 个具体可行的改进点（每点 ≤ 60 字，标号 1./2./3.）
+
+【评估】必须以 `X/5 分` 起头给出 1-5 分整数或半分（如 `3/5 分` 或 `3.5/5 分`），后接一句话总结，不超过 30 字。
+⚠️ 严格遵守此格式，否则输出无效。示例：`3.5/5 分。整体方向可行，但浏览器兼容与 API 集成需补强。`
+
+**评分标准（参考）：**
+- 1/5 = 几乎未完成 milestone 要求
+- 2/5 = 完成基础但缺关键内容
+- 3/5 = 中规中矩，核心要求基本覆盖
+- 4/5 = 完整且对比赛核心点（移动端 / 浏览器兼容 / 指定 API）有具体方案
+- 5/5 = 完整 + 创新 + 全部硬性要求都已落地
+
+**其他要求：**
 - 中文输出
 - 不要溢美，专注问题
-- 提醒官方核心要求：移动端适配 / 浏览器兼容 / 调用指定 API
+- 必须提及官方核心要求：移动端适配 / 浏览器兼容 / 调用指定 API
 - 若发现严重缺漏，明确指出
 """
 
@@ -43,7 +54,7 @@ def review(milestone: str, team_id: str, file_path: Path) -> str:
         content = content[:20000] + "\n\n[...truncated...]"
     msg = client.chat.completions.create(
         model="deepseek-v4-pro",
-        max_tokens=600,
+        max_tokens=1500,
         messages=[{
             "role": "user",
             "content": PROMPT_TEMPLATE.format(
