@@ -2,17 +2,30 @@ name: AI Review (Layer 2)
 on:
   issue_comment:
     types: [created]
+  workflow_dispatch:
+    inputs:
+      milestone:
+        description: 'Milestone 选择'
+        required: true
+        default: 'm3'
+        type: choice
+        options:
+          - m3
+          - m4
+          - m8a
+          - m8b
+          - m8c
 
 permissions:
   contents: write
   pull-requests: write
-  issues: read
+  issues: write
 
 jobs:
   review:
     if: |
-      github.event.issue.pull_request &&
-      contains(github.event.comment.body, '/review')
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.issue.pull_request && contains(github.event.comment.body, '/review'))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,11 +35,19 @@ jobs:
 
       - run: pip install openai pyyaml
 
-      - name: 从 PR 标签推断 milestone
+      - name: 推断 milestone + 决定是否跳过配额
         id: ms
         run: |
-          MILESTONE=$(gh pr view ${{ github.event.issue.number }} --json labels -q '.labels[].name' | grep -E '^M[0-9]+' | head -1 | tr 'A-Z' 'a-z')
-          echo "milestone=${MILESTONE:-m3}" >> $GITHUB_OUTPUT
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "milestone=${{ github.event.inputs.milestone }}" >> "$GITHUB_OUTPUT"
+            echo "skip_budget=true" >> "$GITHUB_OUTPUT"
+            echo "dispatch=true" >> "$GITHUB_OUTPUT"
+          else
+            MILESTONE=$(gh pr view ${{ github.event.issue.number }} --json labels -q '.labels[].name' | grep -E '^M[0-9]+' | head -1 | tr 'A-Z' 'a-z')
+            echo "milestone=${MILESTONE:-m3}" >> "$GITHUB_OUTPUT"
+            echo "skip_budget=false" >> "$GITHUB_OUTPUT"
+            echo "dispatch=false" >> "$GITHUB_OUTPUT"
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -34,18 +55,34 @@ jobs:
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: |
+          FLAGS=""
+          if [ "${{ steps.ms.outputs.skip_budget }}" = "true" ]; then
+            FLAGS="--skip-budget"
+          fi
           python scripts/ai_review.py \
             --milestone ${{ steps.ms.outputs.milestone }} \
             --team-id "$(basename $GITHUB_REPOSITORY)" \
-            --repo-dir . > /tmp/review.md
+            --repo-dir . $FLAGS > /tmp/review.md
 
-      - name: 把 review 发为 PR 评论
+      - name: 发为 PR 评论（PR 触发）
+        if: steps.ms.outputs.dispatch == 'false'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr comment ${{ github.event.issue.number }} --body-file /tmp/review.md
 
-      - name: Commit 配额状态
+      - name: 创建 issue（admin 手动触发）
+        if: steps.ms.outputs.dispatch == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          MS_UPPER=$(echo "${{ steps.ms.outputs.milestone }}" | tr 'a-z' 'A-Z')
+          gh issue create \
+            --title "🤖 AI Review · ${MS_UPPER} · $(date +%Y-%m-%d)" \
+            --body-file /tmp/review.md
+
+      - name: Commit 配额状态（仅 PR 触发，admin 跳过）
+        if: steps.ms.outputs.dispatch == 'false'
         run: |
           git config user.name "Bee Vibe Bot"
           git config user.email "bot@lifebee-vibe-coding.local"
