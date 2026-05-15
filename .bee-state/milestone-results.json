@@ -11,8 +11,8 @@
     }
   },
   "m2": {
-    "passed": false,
-    "message": "brainstorm.md 至少 8 个 Q&A（当前 2 个）",
+    "passed": true,
+    "message": "M2 通过：9 个 Q&A",
     "details": null
   },
   "m3": {
@@ -42,9 +42,9 @@
   },
   "m7": {
     "passed": true,
-    "message": "M7 通过：部署 URL `https://github.com/lifebee-vibe-coding/ops/wiki)`，含`，含`，含 viewport meta",
+    "message": "M7 通过：部署 URL `https://github.com/lifebee-vibe-coding/ops/wiki)`，含`，含`，含`，含 viewport meta",
     "details": {
-      "deployment_url": "https://github.com/lifebee-vibe-coding/ops/wiki)`，含`，含"
+      "deployment_url": "https://github.com/lifebee-vibe-coding/ops/wiki)`，含`，含`，含"
     }
   },
   "m7_plus": {
