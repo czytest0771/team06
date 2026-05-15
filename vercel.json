@@ -1,0 +1,17 @@
+{
+  "cleanUrls": false,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/src/frontend/index.html"
+    },
+    {
+      "source": "/public/assets/(.*)",
+      "destination": "/src/public/assets/$1"
+    },
+    {
+      "source": "/assets/(.*)",
+      "destination": "/src/public/assets/$1"
+    }
+  ]
+}
