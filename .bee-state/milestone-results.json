@@ -5,8 +5,8 @@
     "details": {
       "members_count": 3,
       "offices": [
-        "深圳",
-        "长沙"
+        "长沙",
+        "深圳"
       ]
     }
   },
@@ -42,9 +42,9 @@
   },
   "m7": {
     "passed": true,
-    "message": "M7 通过：部署 URL `https://github.com/lifebee-vibe-coding/ops/wiki)`，含 viewport meta",
+    "message": "M7 通过：部署 URL `https://github.com/lifebee-vibe-coding/ops/wiki)`，含`，含 viewport meta",
     "details": {
-      "deployment_url": "https://github.com/lifebee-vibe-coding/ops/wiki)"
+      "deployment_url": "https://github.com/lifebee-vibe-coding/ops/wiki)`，含"
     }
   },
   "m7_plus": {
@@ -53,18 +53,18 @@
     "details": null
   },
   "m8a": {
-    "passed": false,
-    "message": "M8a 测试文档 与原始模板完全一致（未实际编辑）",
+    "passed": true,
+    "message": "M8a 测试文档 通过：1772 字符",
     "details": null
   },
   "m8b": {
-    "passed": false,
-    "message": "M8b AI 协作记录 与原始模板完全一致（未实际编辑）",
+    "passed": true,
+    "message": "M8b AI 协作记录 通过：2056 字符",
     "details": null
   },
   "m8c": {
-    "passed": false,
-    "message": "M8c 复盘文档 与原始模板完全一致（未实际编辑）",
+    "passed": true,
+    "message": "M8c 复盘文档 通过：2042 字符",
     "details": null
   }
 }
