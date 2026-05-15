@@ -13,9 +13,9 @@
 | **M4** | plan.md | 5/10 | 必须 🔴 | ✅ | M4 通过：6 个 Phase |
 | **M4.5** | UI/UX 设计稿 | 5/10 | 可选 | ❌ | docs/ui-mock/ 下没有非空设计稿文件 |
 | **M.PEER1** | 互评他队文档 | 5/15 | 必须 (评委侧聚合) | ⏳ | 尚未运行（push 任意 commit 触发） |
-| **M5** | Phase 1 首页骨架 | 5/15 | 必须 | ❌ | 未找到部署配置（vercel.json, netlify.toml, CNAME, wrangler.toml, static.json 之一，或 .github/workflows 下含 pages/deploy 工作流） |
+| **M5** | Phase 1 首页骨架 | 5/15 | 必须 | ✅ | M5 通过：2 个源码文件，部署配置 OK，首页含队名「绝对王者」 |
 | **M6** | Phase 2 核心功能 | 5/15 | 必须 | ✅ | M6 通过：src/ 含预约表单 + API 调用 |
-| **M7** | Phase 3+4 部署 | 5/15 | 必须 🔴 | ✅ | M7 通过：部署 URL `https://github.com/lifebee-vibe-coding/ops/wiki)`，含`，含 viewport meta |
+| **M7** | Phase 3+4 部署 | 5/15 | 必须 🔴 | ✅ | M7 通过：部署 URL `https://github.com/lifebee-vibe-coding/ops/wiki)`，含`，含`，含 viewport meta |
 | **M7+** | ≥ 2 分支 | 5/15 | 必须 🔴 | ✅ | M7+ 通过：分支 ['feature/docs-grill-update', 'main'] |
 | **M8A** | 测试文档 (≥300 字) | 5/15 | 必须 🔴 | ✅ | M8a 测试文档 通过：1772 字符 |
 | **M8B** | AI 协作记录 (≥500 字) | 5/15 | 必须 🔴 | ✅ | M8b AI 协作记录 通过：2056 字符 |
