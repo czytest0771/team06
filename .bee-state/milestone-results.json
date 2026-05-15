@@ -32,18 +32,20 @@
   },
   "m5": {
     "passed": false,
-    "message": "src/ 下未找到源码文件（支持: .astro, .cjs, .htm, .html, .js, .jsx, .mjs, .svelte, .ts, .tsx, .vue）",
+    "message": "未找到部署配置（vercel.json, netlify.toml, CNAME, wrangler.toml, static.json 之一，或 .github/workflows 下含 pages/deploy 工作流）",
     "details": null
   },
   "m6": {
-    "passed": false,
-    "message": "src/ 下未找到源码文件",
+    "passed": true,
+    "message": "M6 通过：src/ 含预约表单 + API 调用",
     "details": null
   },
   "m7": {
-    "passed": false,
-    "message": "src/ 下未找到源码文件，无法校验移动端适配",
-    "details": null
+    "passed": true,
+    "message": "M7 通过：部署 URL `https://github.com/lifebee-vibe-coding/ops/wiki)`，含 viewport meta",
+    "details": {
+      "deployment_url": "https://github.com/lifebee-vibe-coding/ops/wiki)"
+    }
   },
   "m7_plus": {
     "passed": true,
