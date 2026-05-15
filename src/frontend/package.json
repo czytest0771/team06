@@ -1,0 +1,12 @@
+﻿{
+  "name": "beefintech-marketing-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "test": "node frontend.test.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
