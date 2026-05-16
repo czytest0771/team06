@@ -42,9 +42,9 @@
   },
   "m7": {
     "passed": true,
-    "message": "M7 通过：部署 URL `https://github.com/lifebee-vibe-coding/ops/wiki)`，含`，含`，含`，含`，含 viewport meta",
+    "message": "M7 通过：部署 URL `https://lifebee-vibe-coding.github.io/team-06/`，含 viewport meta",
     "details": {
-      "deployment_url": "https://github.com/lifebee-vibe-coding/ops/wiki)`，含`，含`，含`，含"
+      "deployment_url": "https://lifebee-vibe-coding.github.io/team-06/"
     }
   },
   "m7_plus": {
@@ -54,17 +54,17 @@
   },
   "m8a": {
     "passed": true,
-    "message": "M8a 测试文档 通过：1772 字符",
+    "message": "M8a 测试文档 通过：3785 字符",
     "details": null
   },
   "m8b": {
     "passed": true,
-    "message": "M8b AI 协作记录 通过：2043 字符",
+    "message": "M8b AI 协作记录 通过：3723 字符",
     "details": null
   },
   "m8c": {
     "passed": true,
-    "message": "M8c 复盘文档 通过：2042 字符",
+    "message": "M8c 复盘文档 通过：2711 字符",
     "details": null
   }
 }
