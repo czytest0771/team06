@@ -1,3 +1,10 @@
+## 官网部署
+
+- 官网地址：https://lifebee-vibe-coding.github.io/team-06/
+- 源码目录：`src/frontend/`
+- 静态资源：`src/public/assets/`
+- 部署方式：GitHub Pages workflow（见 `.github/workflows/pages.yml`）
+
 <!-- BEE-STATUS-START -->
 # Team · 进度仪表盘
 
