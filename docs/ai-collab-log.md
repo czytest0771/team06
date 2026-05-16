@@ -2,7 +2,7 @@
 
 ## 使用的 AI 工具
 
-本项目主要使用 Codex 作为代码协作和交付整理工具，用于接手旧项目、恢复工作现场、阅读仓库结构、定位真实项目目录、修改前端预约表单、验证 Gateway API、整理 `src/` 目录并推送 GitHub。前期设计和计划文档中也保留了 superpowers brainstorming、writing-plans、grill-with-docs 等工作流痕迹，用来帮助明确官网定位、页面结构、交互范围和比赛提交要求。
+本项目主要使用 Codex 作为代码协作和交付整理工具，用于阅读仓库结构、定位真实项目目录、修改前端预约表单、验证 Gateway API、整理 `src/` 目录并推送 GitHub。前期设计和计划文档中也保留了 superpowers brainstorming、writing-plans、grill-with-docs 等工作流痕迹，用来帮助明确官网定位、页面结构、交互范围和比赛提交要求。
 
 ## 关键协作时刻 1：恢复工作现场
 
