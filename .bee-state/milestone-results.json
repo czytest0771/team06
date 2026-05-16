@@ -5,8 +5,8 @@
     "details": {
       "members_count": 3,
       "offices": [
-        "深圳",
-        "长沙"
+        "长沙",
+        "深圳"
       ]
     }
   },
@@ -42,9 +42,9 @@
   },
   "m7": {
     "passed": true,
-    "message": "M7 通过：部署 URL `https://github.com/lifebee-vibe-coding/ops/wiki)`，含`，含`，含`，含 viewport meta",
+    "message": "M7 通过：部署 URL `https://github.com/lifebee-vibe-coding/ops/wiki)`，含`，含`，含`，含`，含 viewport meta",
     "details": {
-      "deployment_url": "https://github.com/lifebee-vibe-coding/ops/wiki)`，含`，含`，含"
+      "deployment_url": "https://github.com/lifebee-vibe-coding/ops/wiki)`，含`，含`，含`，含"
     }
   },
   "m7_plus": {
@@ -59,7 +59,7 @@
   },
   "m8b": {
     "passed": true,
-    "message": "M8b AI 协作记录 通过：2056 字符",
+    "message": "M8b AI 协作记录 通过：2043 字符",
     "details": null
   },
   "m8c": {
