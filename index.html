@@ -1,0 +1,2597 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Concept D - Bluechip Editorial</title>
+  <style>
+    :root {
+      --paper: #fbfcfe;
+      --surface: #ffffff;
+      --ink: #0e1726;
+      --muted: #5a6478;
+      --line: #e2e7ef;
+      --blue: #2b7df5;
+      --blue-deep: #1e5bc6;
+      --blue-soft: #eaf2ff;
+      --shadow: 0 28px 90px -42px rgba(14, 23, 38, 0.36);
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      padding-top: 64px;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-x: hidden;
+      zoom: 1.1;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    html { padding-top: 0; }
+    body { padding-top: 64px; }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .topnav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      height: 64px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topnav-inner {
+      width: min(100%, 1328px);
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .nav-left,
+    .nav-right,
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-left { gap: 42px; }
+    .nav-links { gap: 32px; }
+    .nav-right { gap: 18px; }
+
+    .logo { width: 123px; height: 30px; object-fit: contain; }
+
+    .nav-links a,
+    .language {
+      color: var(--muted);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .language-switcher {
+      position: relative;
+      color: var(--muted);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .language-toggle {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+      padding: 10px 4px;
+    }
+
+    .language-menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      min-width: 150px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 18px 50px -28px rgba(14, 23, 38, 0.4);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-4px);
+      transition: opacity 0.16s ease, transform 0.16s ease;
+      z-index: 20;
+    }
+
+    .language-switcher.open .language-menu {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 10px;
+      border: 0;
+      border-radius: 7px;
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .language-option:hover,
+    .language-option.active {
+      background: var(--blue-soft);
+      color: var(--blue-deep);
+      font-weight: 700;
+    }
+
+    .demo-btn,
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      white-space: nowrap;
+      font-weight: 650;
+    }
+
+    .demo-btn {
+      height: 34px;
+      padding: 0 18px;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 13px;
+    }
+
+    .section {
+      padding: 64px 0;
+      border-top: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .inner {
+      width: min(100%, 1328px);
+      margin: 0 auto;
+      padding: 0 56px;
+    }
+
+    .hero {
+      padding: 18px 0 44px;
+    }
+
+    .hero-inner {
+      width: min(100%, 1328px);
+      margin: 0 auto;
+      padding: 0 56px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(330px, 1fr);
+      gap: 52px;
+      align-items: end;
+    }
+
+    .trust-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      margin-bottom: 16px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue-deep);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .trust-pill::before,
+    .status-dot,
+    .footer-dot {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+      flex: 0 0 auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    p { margin-top: 0; }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 0;
+      font-size: clamp(56px, 5.2vw, 76px);
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+      font-weight: 650;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      font-size: clamp(40px, 3.9vw, 56px);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      font-weight: 650;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+      line-height: 1.2;
+      letter-spacing: -0.012em;
+    }
+
+    .blue { color: var(--blue); }
+    .muted { color: var(--muted); }
+
+    .lead,
+    .hero-copy {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .hero-copy {
+      max-width: 560px;
+      margin: 22px 0 0;
+      font-size: 19px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      min-height: 46px;
+      padding: 14px 22px;
+      font-size: 15px;
+    }
+
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-secondary { border: 1px solid var(--line); color: var(--ink); background: transparent; font-weight: 500; }
+
+    .stats-rail {
+      padding-left: 28px;
+      border-left: 2px solid var(--blue);
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .product-eyebrow {
+      color: #2f7cff !important;
+    }
+
+    .awards-eyebrow {
+      color: #2f7cff !important;
+    }
+
+    .stat-row {
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stat-row:last-child { border-bottom: 0; }
+
+    .stat-number {
+      font-size: 34px;
+      line-height: 1;
+      letter-spacing: -0.025em;
+      font-weight: 800;
+    }
+
+    .stat-label {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .approval-strip {
+      background: var(--blue-soft);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .approval-inner {
+      width: min(100%, 1328px);
+      margin: 0 auto;
+      padding: 18px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      color: var(--blue-deep);
+      font-size: 13px;
+      font-weight: 650;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .approval-inner span:first-child {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .ai-demo {
+      display: grid;
+      grid-template-columns: minmax(500px, 1fr) minmax(420px, 540px);
+      gap: 30px;
+      align-items: start;
+    }
+
+    .ai-copy h2 {
+      max-width: 620px;
+      font-size: clamp(28px, 3vw, 44px);
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+    }
+
+    .ai-title-line {
+      display: block;
+      white-space: nowrap;
+      letter-spacing: -0.045em;
+    }
+
+    .ai-copy .lead {
+      max-width: 470px;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    .demo-card {
+      width: 100%;
+      max-width: 540px;
+      justify-self: start;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 12px 40px -16px rgba(43, 125, 245, 0.25);
+    }
+
+    .demo-header,
+    .demo-tabs {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+
+    .demo-tabs {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      padding: 14px;
+    }
+
+    .chip {
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 13px;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .chip.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+      font-weight: 700;
+    }
+
+    .demo-body { padding: 14px; }
+    .demo-label { margin-bottom: 6px; color: var(--muted); font-size: 12px; }
+    .chat-input-panel {
+      display: grid;
+      grid-template-columns: 1fr 32px;
+      align-items: end;
+      gap: 8px;
+      margin-bottom: 10px;
+      padding: 9px 10px;
+      border: 1px solid #c9dcf7;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 12px 36px -28px rgba(43, 125, 245, 0.42);
+      transition: border-color 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .chat-input-panel:focus-within {
+      border-color: #8dbaff;
+      box-shadow: 0 0 0 3px rgba(43, 125, 245, 0.1), 0 14px 42px -30px rgba(43, 125, 245, 0.5);
+    }
+
+    .chat-input-wrap label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .chat-question {
+      width: 100%;
+      min-height: 26px;
+      border: 0;
+      outline: 0;
+      resize: none;
+      color: var(--ink);
+      background: transparent;
+      font: inherit;
+      font-size: 15px;
+      line-height: 1.32;
+    }
+
+    .chat-question::placeholder { color: #98a3b7; }
+
+    .chat-submit {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 6px;
+      background: #dbeafe;
+      color: var(--blue-deep);
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    #chatAnswerLabel,
+    #chatAnswer { display: none; }
+
+    .demo-card.answered #chatAnswerLabel,
+    .demo-card.answered #chatAnswer { display: block; }
+
+    .result-panel {
+      padding: 14px;
+      background: var(--blue-soft);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+
+    .product-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      font-size: 12px;
+    }
+
+
+    .scenario-card,
+    .answer-chat {
+      display: grid;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .scenario-line {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .scenario-bar {
+      height: 8px;
+      background: var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .scenario-bar span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), #5eead4);
+      border-radius: inherit;
+    }
+
+    .answer-bubble {
+      max-width: 92%;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .answer-bubble.user {
+      justify-self: end;
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+    }
+
+    .demo-foot {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .demo-foot span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .demo-foot span + span::before {
+      content: "·";
+      margin-right: 4px;
+      color: var(--muted);
+    }
+
+    .hk-flag {
+      width: 18px;
+      height: 12px;
+      display: inline-block;
+      border-radius: 2px;
+      background: #de2910;
+      box-shadow: 0 0 0 1px rgba(14, 23, 38, 0.12);
+      position: relative;
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+
+    .hk-flag::before {
+      content: "✦";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      color: #fff;
+      font-size: 9px;
+      line-height: 1;
+      transform: translate(-50%, -50%) rotate(18deg);
+    }
+
+    .mini-card {
+      padding: 10px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .bar { height: 4px; margin: 7px 0 5px; background: var(--line); border-radius: 999px; }
+    .bar span { display: block; height: 100%; background: var(--blue); border-radius: inherit; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 38px;
+    }
+
+    .section-head p {
+      max-width: 420px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .phone-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 56px;
+    }
+
+    .phone-cell { min-width: 0; }
+
+    .iphone {
+      width: min(100%, 280px);
+      aspect-ratio: 280 / 580;
+      margin: 0 auto 28px;
+      padding: 9px;
+      border-radius: 48px;
+      background: #f7f9fc;
+      box-shadow: 0 28px 80px -42px rgba(14, 23, 38, 0.48), inset 0 0 0 1px rgba(14, 23, 38, 0.08);
+    }
+
+    .iphone.dark {
+      background: #091327;
+    }
+
+    .screen {
+      height: 100%;
+      overflow: hidden;
+      border-radius: 39px;
+      background: #fff;
+      border: 1px solid rgba(14, 23, 38, 0.06);
+      padding: 18px 18px 22px;
+      font-size: 12px;
+    }
+
+    .iphone.dark .screen {
+      background: #071226;
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .phone-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .phone-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+      margin-bottom: 16px;
+    }
+
+    .phone-title strong { display: block; font-size: 17px; }
+    .phone-title span { color: var(--muted); }
+
+    .pill-blue {
+      display: inline-flex;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue-deep);
+      font-weight: 800;
+      font-size: 11px;
+    }
+
+    .list-row,
+    .policy-row,
+    .dark-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      min-height: 44px;
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      margin-bottom: 9px;
+      background: #fff;
+    }
+
+    .list-row b,
+    .policy-row b,
+    .dark-row b { font-size: 12px; }
+
+    .list-icon {
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 7px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 12px;
+      flex: 0 0 auto;
+    }
+
+    .dark-row {
+      background: #0f1e36;
+      border-color: rgba(255, 255, 255, 0.09);
+      color: #dce7ff;
+    }
+
+    .dark-row span { color: #78e6a2; }
+
+    .policy-head {
+      margin: -18px -18px 16px;
+      padding: 22px 18px 18px;
+      color: #fff;
+      background: var(--blue);
+    }
+
+    .policy-head .amount {
+      display: block;
+      margin-top: 6px;
+      font-size: 24px;
+      font-weight: 850;
+    }
+
+    .phone-caption-line {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .phone-caption-line span:first-child {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .phone-caption-line span:last-child {
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .phone-cell p,
+    .capability p,
+    .security-card p,
+    .quote-card p,
+    .award-card p,
+    .company-copy {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .web-console {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .stats-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .stats-list div {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .stats-list strong {
+      min-width: 90px;
+      color: var(--ink);
+      font-size: 22px;
+    }
+
+    .browser-shell {
+      width: 1120px;
+      max-width: none;
+      height: 500px;
+      margin-left: 64px;
+      transform: scale(0.72);
+      transform-origin: left center;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #f5f7fb;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(14, 23, 38, 0.1);
+    }
+
+    .browser-bar {
+      height: 104px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 0;
+      background: #202124;
+      color: #e8eaed;
+      font-size: 12px;
+    }
+
+    .browser-tabs,
+    .browser-url {
+      display: flex;
+      align-items: center;
+    }
+
+    .browser-tabs {
+      height: 52px;
+      padding: 0 18px;
+      gap: 14px;
+    }
+
+    .browser-tab {
+      align-self: flex-end;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 210px;
+      height: 38px;
+      padding: 0 16px;
+      border-radius: 12px 12px 0 0;
+      background: #2d2f33;
+      color: #f4f7fb;
+      font-weight: 650;
+    }
+
+    .browser-tab::before,
+    .browser-url::before {
+      content: "";
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #676d76;
+      flex: 0 0 auto;
+    }
+
+    .browser-url {
+      height: 52px;
+      gap: 10px;
+      padding: 0 24px;
+      background: #25272b;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      color: #c9cdd5;
+      font-size: 14px;
+    }
+
+    .url-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 420px;
+      height: 32px;
+      padding: 0 16px;
+      border-radius: 999px;
+      background: #1d1f22;
+    }
+
+    .url-pill::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #60666f;
+      flex: 0 0 auto;
+    }
+
+    .traffic {
+      display: flex;
+      gap: 8px;
+      margin-right: 2px;
+    }
+
+    .traffic span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ff5f57;
+    }
+
+    .traffic span:nth-child(2) { background: #febc2e; }
+    .traffic span:nth-child(3) { background: #28c840; }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: 205px 1fr;
+      height: calc(100% - 104px);
+      background: #f5f7fb;
+    }
+
+    .sidebar {
+      border-right: 1px solid var(--line);
+      padding: 22px 12px 18px 18px;
+      background: #fff;
+      font-size: 14px;
+      color: #314057;
+    }
+
+    .side-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .side-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
+      background:
+        linear-gradient(135deg, #2f7cff 0 48%, transparent 48% 54%, #8fb7ff 54% 100%),
+        #eaf2ff;
+      box-shadow: inset 0 0 0 1px rgba(47, 124, 255, 0.18);
+    }
+
+    .side-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: #30425f;
+      margin-bottom: 7px;
+      font-weight: 650;
+    }
+
+    .side-item.active {
+      background: var(--blue-soft);
+      color: var(--blue-deep);
+      font-weight: 800;
+    }
+
+    .side-icon {
+      width: 18px;
+      text-align: center;
+      font-size: 13px;
+      opacity: 0.75;
+    }
+
+    .new-pill {
+      margin-left: auto;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #f0e8ff;
+      color: #8a5cff;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .dash-main {
+      width: 780px;
+      padding: 22px 24px;
+      overflow: visible;
+    }
+
+    .dash-main h3 {
+      margin: 0;
+      font-size: 21px;
+    }
+
+    .dash-subtitle {
+      margin-top: 4px;
+      color: #8994a8;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 16px 0 18px;
+    }
+
+    .kpi {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      color: #657086;
+      font-size: 13px;
+    }
+
+    .kpi strong {
+      display: block;
+      margin-top: 4px;
+      color: var(--ink);
+      font-size: 24px;
+    }
+
+    .kpi span {
+      display: block;
+      margin-top: 2px;
+      color: #12a66a;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .chart-card {
+      display: grid;
+      grid-template-columns: 500px 210px;
+      gap: 14px;
+    }
+
+    .chart,
+    .policy-mix {
+      min-height: 190px;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .chart-line {
+      width: 100%;
+      height: 130px;
+      margin-top: 8px;
+      display: block;
+    }
+
+    .chart-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+    }
+
+    .chart-currency {
+      color: #8b95a8;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .mix-bar {
+      height: 6px;
+      margin: 7px 0 13px;
+      background: var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .mix-bar span {
+      display: block;
+      height: 100%;
+      background: var(--blue);
+    }
+
+    .capability-grid,
+    .quote-grid,
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .capability-grid { margin-top: 36px; }
+    .quote-grid { margin-top: 34px; }
+    .awards-grid { margin-top: 34px; gap: 20px; }
+
+    .card,
+    .capability,
+    .security-card,
+    .quote-card,
+    .award-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    .capability { padding: 24px; }
+
+    .badge {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 44px;
+      align-items: start;
+    }
+
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .security-card { padding: 22px; }
+    .security-card h3 { color: var(--blue); }
+
+    .quote-card {
+      padding: 28px;
+      min-height: 160px;
+    }
+
+    .quote-card blockquote {
+      margin: 0 0 20px;
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .award-card {
+      padding: 14px;
+      text-align: center;
+      box-shadow: 0 4px 16px -8px rgba(11, 22, 40, 0.08);
+    }
+
+    .award-card img {
+      width: 100%;
+      height: 178px;
+      object-fit: contain;
+    }
+
+    .company-facts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 24px;
+      font-size: 14px;
+    }
+
+    .fact-label {
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      padding: 62px 56px;
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .cta h2 { max-width: 720px; }
+    .cta .btn-primary { background: #fff; color: var(--blue-deep); }
+    .cta .btn-secondary { color: #fff; border-color: rgba(255, 255, 255, 0.6); }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 24px 56px;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 13px;
+    }
+
+    .footer span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      background: rgba(14, 23, 38, 0.48);
+      z-index: 100;
+    }
+
+    .modal-backdrop.open { display: flex; }
+
+    .demo-modal {
+      width: min(100%, 760px);
+      max-height: calc(100vh - 64px);
+      overflow: auto;
+      border-radius: 14px;
+      background: #f8fbff;
+      border: 1px solid #cfe0fb;
+      box-shadow: 0 32px 90px -36px rgba(14, 23, 38, 0.55);
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 24px 28px 0;
+    }
+
+    .modal-head h3 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .modal-close {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .demo-form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px 22px;
+      padding: 28px;
+    }
+
+    .demo-form.compact {
+      grid-template-columns: 1fr;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      color: #1e2b44;
+      font-weight: 750;
+      font-size: 15px;
+    }
+
+    .form-field.full { grid-column: 1 / -1; }
+    .field-label { display: inline-flex; gap: 4px; align-items: baseline; }
+    .required { color: #ef4444; }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      border: 1px solid #c9dcf7;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-weight: 500;
+      outline: none;
+      padding: 0 16px;
+    }
+
+    .form-field input,
+    .form-field select { height: 54px; }
+
+    .form-field textarea {
+      min-height: 104px;
+      padding-top: 14px;
+      resize: vertical;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(43, 125, 245, 0.12);
+    }
+
+    .submit-demo {
+      grid-column: 1 / -1;
+      height: 56px;
+      border: 0;
+      border-radius: 8px;
+      background: #1476ff;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .demo-success {
+      display: none;
+      padding: 56px 40px 60px;
+      text-align: center;
+    }
+
+    .demo-success.visible { display: block; }
+    .demo-form.hidden { display: none; }
+
+    .demo-error {
+      display: none;
+      grid-column: 1 / -1;
+      margin: -4px 0 4px;
+      padding: 12px 14px;
+      border: 1px solid rgba(220, 38, 38, 0.22);
+      border-radius: 8px;
+      background: #fff5f5;
+      color: #b42318;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .demo-error.visible { display: block; }
+
+    .success-icon {
+      width: 54px;
+      height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .demo-success p {
+      margin: 0 auto;
+      max-width: 520px;
+      color: var(--ink);
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 760px) {
+      .demo-form { grid-template-columns: 1fr; }
+      .modal-backdrop { padding: 18px; }
+    }
+    @media (max-width: 920px) {
+      .topnav { padding: 0 24px; }
+      .topnav { padding: 0; }
+      .topnav-inner { padding: 0 24px; }
+      .nav-links { display: none; }
+      .section,
+      .hero,
+      .cta { padding: 64px 0; }
+      .inner,
+      .hero-inner { padding: 0 24px; }
+      .hero,
+      .ai-demo,
+      .web-console,
+      .split,
+      .section-head,
+      .cta {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+      .phone-grid,
+      .capability-grid,
+      .quote-grid,
+      .awards-grid,
+      .security-grid,
+      .company-facts,
+      .product-cards { grid-template-columns: 1fr; }
+      .browser-shell { width: 100%; }
+      .approval-inner { padding: 18px 24px; flex-wrap: wrap; overflow: hidden; }
+      h1 { font-size: 52px; }
+      .ai-copy h2 { font-size: clamp(24px, 5.2vw, 42px); }
+    }
+
+
+
+    @media (max-width: 768px) {
+      body { zoom: 1; }
+      .section,
+      .hero,
+      .cta { padding: 48px 0; }
+      .inner,
+      .hero-inner { padding: 0 22px; }
+      .hero-inner,
+      .ai-demo,
+      .web-console,
+      .split,
+      .section-head,
+      .cta {
+        grid-template-columns: 1fr;
+        display: grid;
+        gap: 30px;
+      }
+      .hero-inner { align-items: start; }
+      .ai-title-line { white-space: normal; }
+      .demo-card { max-width: none; justify-self: stretch; }
+      .approval-inner {
+        padding: 16px 22px;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 12px 18px;
+      }
+      .phone-grid,
+      .capability-grid,
+      .quote-grid,
+      .awards-grid,
+      .security-grid,
+      .company-facts,
+      .product-cards { grid-template-columns: 1fr; }
+      .iphone { width: min(100%, 250px); margin-bottom: 20px; }
+      .web-console { align-items: start; overflow: hidden; }
+      .browser-shell {
+        width: 1120px;
+        max-width: none;
+        height: 500px;
+        margin-left: 0;
+        transform: none;
+        transform-origin: left top;
+        zoom: .6;
+      }
+      .policy-mix { display: block; }
+      .modal-backdrop { padding: 18px; align-items: flex-start; }
+      .demo-modal { max-height: calc(100vh - 36px); }
+    }
+
+    @media (max-width: 640px) and (min-width: 481px) {
+      .browser-shell { zoom: .5; }
+    }
+
+    @media (max-width: 560px) and (min-width: 481px) {
+      .browser-shell { zoom: .42; }
+    }
+
+    @media (max-width: 380px) {
+      .browser-shell { zoom: .27; }
+    }
+
+    @media (max-width: 340px) {
+      .browser-shell { zoom: .25; }
+    }
+    @media (max-width: 480px) {
+      body { padding-top: 58px; }
+      .topnav { height: 58px; }
+      .topnav-inner { padding: 0 16px; gap: 12px; }
+      .nav-left { gap: 0; }
+      .logo { width: 112px; height: 28px; }
+      .nav-right { gap: 10px; }
+      .language-toggle { font-size: 13px; }
+      .language-menu { right: 0; }
+      .demo-btn { height: 32px; padding: 0 12px; font-size: 12px; }
+      .section,
+      .hero,
+      .cta { padding: 42px 0; }
+      .inner,
+      .hero-inner { padding: 0 18px; }
+      .hero-inner { gap: 28px; }
+      .trust-pill { margin-bottom: 14px; font-size: 11px; }
+      h1 { font-size: clamp(39px, 13vw, 48px); line-height: 1; letter-spacing: -0.045em; }
+      h2 { font-size: clamp(30px, 9vw, 38px); }
+      .hero-copy,
+      .lead { font-size: 16px; line-height: 1.55; }
+      .actions { width: 100%; flex-direction: column; align-items: stretch; }
+      .btn { width: 100%; justify-content: center; }
+      .hero-stats { padding-left: 18px; }
+      .stat-row { padding: 10px 0; }
+      .stat-number { font-size: 30px; }
+      .approval-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 14px 18px;
+        gap: 10px 14px;
+        font-size: 12px;
+      }
+      .approval-inner span:first-child { grid-column: 1 / -1; }
+      .section-head { margin-bottom: 30px; }
+      .demo-header { padding: 12px 14px; }
+      .demo-tabs { padding: 12px; gap: 8px; }
+      .chip { padding: 7px 10px; font-size: 12px; }
+      .demo-body { padding: 12px; }
+      .chat-input-panel { grid-template-columns: 1fr 30px; padding: 9px; }
+      .chat-question { font-size: 14px; }
+      .chat-submit { width: 28px; height: 28px; }
+      .result-panel { padding: 12px; }
+      .browser-shell {
+        width: 1120px;
+        height: 500px;
+        transform: none;
+        zoom: .30;
+      }
+      .capability,
+      .security-card,
+      .quote-card { padding: 20px; }
+      .award-card img { height: 130px; }
+      .cta { padding: 42px 18px; }
+      .footer { padding: 22px 18px; }
+      .modal-head { padding: 20px 18px 0; }
+      .modal-head h3 { font-size: 24px; }
+      .demo-form { padding: 20px 18px; }
+      .form-field input,
+      .form-field select { height: 48px; }
+      .submit-demo { height: 50px; }
+      .demo-success { padding: 44px 24px 48px; }
+      .demo-success p { font-size: 18px; }
+    }
+
+    @media (max-width: 380px) {
+      .browser-shell { zoom: .27; }
+    }
+
+    @media (max-width: 340px) {
+      .browser-shell { zoom: .25; }
+    }
+    /* late narrow mobile dashboard override */
+  </style>
+</head>
+<body id="home">
+  <header class="topnav">
+    <div class="topnav-inner">
+      <div class="nav-left">
+        <img class="logo" src="public/assets/beefintech-logo@4x.png" alt="BeeFintech" />
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="#home">Home</a>
+          <a href="#ai-broker">AI Broker</a>
+          <a href="#platform">Platform</a>
+          <a href="#security">Security</a>
+          <a href="#customers">Customers</a>
+          <a href="#company">Company</a>
+        </nav>
+      </div>
+      <div class="nav-right">
+        <div class="language-switcher" id="languageSwitcher">
+          <button class="language-toggle" type="button" aria-haspopup="true" aria-expanded="false">EN · 繁中</button>
+          <div class="language-menu" role="menu" aria-label="Language selector">
+            <button class="language-option" type="button" data-lang-choice="en" role="menuitem">English</button>
+            <button class="language-option" type="button" data-lang-choice="zh-Hans" role="menuitem">简体中文</button>
+            <button class="language-option" type="button" data-lang-choice="zh-Hant" role="menuitem">繁體中文</button>
+          </div>
+        </div>
+        <a class="demo-btn" href="#book-demo">Book a demo</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="trust-pill">Built for Hong Kong insurance brokerage teams</div>
+        <h1>The InsurTech<br>platform Hong Kong's<br>brokers <span class="blue">trust.</span></h1>
+        <p class="hero-copy">Nine years. 150+ broker firms. 130+ insurers. Zero breaches. 95% of customers renew, every year.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#ai-broker">Try Bee AI — no signup →</a>
+          <a class="btn btn-secondary" href="#book-demo">Book a demo</a>
+        </div>
+      </div>
+      <aside class="stats-rail">
+        <p class="eyebrow">Trust, in numbers</p>
+        <div class="stat-row"><div class="stat-number">95%+</div><div class="stat-label">annual renewal rate</div></div>
+        <div class="stat-row"><div class="stat-number">8 yrs</div><div class="stat-label">zero data breaches</div></div>
+        <div class="stat-row"><div class="stat-number">60%+</div><div class="stat-label">long-term life broker share</div></div>
+        <div class="stat-row"><div class="stat-number">20,000+</div><div class="stat-label">pros use our AI daily</div></div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="approval-strip">
+    <div class="approval-inner">
+      <span>Built for</span><span>Broker operations</span><span>Private deployment</span><span>Policy lifecycle</span><span>AI workflow demo</span><span>Data residency</span><span>Audit trail</span><span>Integration-ready</span>
+    </div>
+  </div>
+
+  <section class="section" id="ai-broker">
+    <div class="inner ai-demo">
+      <div class="ai-copy">
+        <p class="eyebrow">Try it now</p>
+        <h2><span class="ai-title-line">Don't&nbsp;take&nbsp;our&nbsp;word&nbsp;for&nbsp;it.</span><span class="muted">Try our AI.</span></h2>
+        <p class="lead">A guided aichatbot demo for broker workflows. Free to try, anonymous, and designed for public website evaluation.</p>
+      </div>
+      <div class="demo-card">
+        <div class="demo-header">
+          <div style="display:flex;align-items:center;gap:10px"><span class="status-dot"></span><span>Bee AI · ready</span></div>
+          <span class="muted"><span>Credits</span> <strong class="blue" id="chatCredits">3 / 3</strong></span>
+        </div>
+        <div class="demo-tabs">
+          <button class="chip active" type="button" data-ai-mode="compare">Compare products</button><button class="chip" type="button" data-ai-mode="visualize">Visualize a scenario</button><button class="chip" type="button" data-ai-mode="ask">Ask Bee anything</button>
+        </div>
+        <div class="demo-body">
+          <form class="chat-input-panel" id="chatForm">
+            <div class="chat-input-wrap">
+              <label for="chatQuestion">You</label>
+              <textarea class="chat-question" id="chatQuestion" rows="1" placeholder="Enter your question. Example: I'm 35, want retirement protection, budget HK$5,000/month. Compare 2-3 options."></textarea>
+            </div>
+            <button class="chat-submit" type="submit" aria-label="Submit question">→</button>
+          </form>
+          <div class="demo-label blue" id="chatAnswerLabel"><strong>Bee AI · 642ms</strong></div>
+          <div class="result-panel" id="chatAnswer"></div>
+          <div class="demo-foot">
+            <span>⚡&lt;800ms</span>
+            <span>🔒 No data stored</span>
+            <span><i class="hk-flag" aria-hidden="true"></i> HK</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="inner">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow product-eyebrow">The product · Mobile + Web in sync</p>
+          <h2>From client onboarding<br>to electronic signature.</h2>
+        </div>
+        <p>FNA · onboarding · underwriting support · servicing · settlement — the workflow chain on one phone, mirrored on a manager-grade web console.</p>
+      </div>
+
+      <div class="phone-grid">
+        <article class="phone-cell">
+          <div class="iphone">
+            <div class="screen">
+              <div class="phone-status"><span>9:41</span><span>FNA Overview</span></div>
+              <div class="phone-title"><div><strong>Chan Dawen</strong><span>MY Endowment Savings Plan</span></div><span class="pill-blue">Completed</span></div>
+              <div class="list-row"><span class="list-icon">1</span><b>Basic Information</b><span class="blue">Done</span></div>
+              <div class="list-row"><span class="list-icon">2</span><b>Financial Needs Analysis</b><span class="blue">Done</span></div>
+              <div class="list-row"><span class="list-icon">3</span><b>Product Introduction & Selection</b><span class="blue">Done</span></div>
+              <div class="list-row"><span class="list-icon">4</span><b>E-Signature</b><span class="blue">Signed</span></div>
+              <div class="list-row"><span class="list-icon">5</span><b>Form Selection</b><span class="blue">Done</span></div>
+            </div>
+          </div>
+          <div class="phone-caption-line"><span>01</span><span></span></div>
+          <h3>FNA Overview</h3>
+          <p>Five-step FNA, signed-and-locked. PIBA-2023 aligned, 7-year audit log.</p>
+        </article>
+        <article class="phone-cell">
+          <div class="iphone dark">
+            <div class="screen">
+              <div class="phone-status"><span>9:41</span><span>AI Assist</span></div>
+              <p class="muted">Last 19 min</p>
+              <h3>Sample profile<br>Retirement planning scenario</h3>
+              <div class="dark-row"><b>Retirement savings option</b><span>92%</span></div>
+              <div class="dark-row"><b>Annuity income option</b><span>87%</span></div>
+              <div class="dark-row"><b>Whole-life savings option</b><span>82%</span></div>
+              <div class="btn btn-primary" style="width:100%;margin-top:16px">View workflow summary</div>
+            </div>
+          </div>
+          <div class="phone-caption-line"><span>02</span><span></span></div>
+          <h3>AI Assist</h3>
+          <p>Illustrative AI assistance for comparing product categories and next-step workflow.</p>
+        </article>
+        <article class="phone-cell">
+          <div class="iphone">
+            <div class="screen">
+              <div class="policy-head"><span>Policies</span><span class="amount">HK$ 4,287,520</span></div>
+              <div class="kpis" style="grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 16px"><div><strong>8</strong><small>Renewals due</small></div><div><strong>3</strong><small>Underwriting</small></div><div><strong>12</strong><small>Opening</small></div></div>
+              <div class="policy-row"><b>Margaret Wong</b><span>HK$120,080</span></div>
+              <div class="policy-row"><b>Andrew Lee</b><span>HK$85,000</span></div>
+              <div class="policy-row"><b>Cassie Chan</b><span>HK$240,080</span></div>
+            </div>
+          </div>
+          <div class="phone-caption-line"><span>03</span><span></span></div>
+          <h3>Policy Dashboard</h3>
+          <p>AUM, renewals, underwriting, commission — refreshed in real time.</p>
+        </article>
+      </div>
+
+      <div class="web-console">
+        <div>
+          <p class="eyebrow">Web Console</p>
+          <h2 style="font-size:36px">Brokerage HQ in your browser.</h2>
+          <p class="lead">Real-time policy dashboard, commission settlement, and performance analytics for the whole team — synced with every phone.</p>
+          <div class="stats-list"><div><strong>100K+</strong>daily policy capacity</div><div><strong>16+</strong>data sources unified</div><div><strong>95%</strong>process automation</div></div>
+        </div>
+        <div class="browser-shell">
+          <div class="browser-bar">
+            <div class="browser-tabs"><div class="traffic"><span></span><span></span><span></span></div><div class="browser-tab">LifeBee Dashboard</div></div>
+            <div class="browser-url"><div class="url-pill">app.beefintech.hk/dashboard</div></div>
+          </div>
+          <div class="dashboard">
+            <aside class="sidebar"><div class="side-brand"><span class="side-logo"></span><strong>LifeBee</strong></div><div class="side-item active"><span class="side-icon">▥</span>Dashboard</div><div class="side-item"><span class="side-icon">♟</span>Clients</div><div class="side-item"><span class="side-icon">□</span>FNA & Workflows</div><div class="side-item"><span class="side-icon">◻</span>Policies</div><div class="side-item"><span class="side-icon">♜</span>Commissions</div><div class="side-item"><span class="side-icon">▰</span>Analytics</div><div class="side-item"><span class="side-icon">✦</span>AI Broker<span class="new-pill">NEW</span></div></aside>
+            <main class="dash-main"><h3>Dashboard</h3><div class="dash-subtitle">2026 Q4 · New hour</div><div class="kpis"><div class="kpi">Active policies<strong>1,247</strong><span>↑ 8.2%</span></div><div class="kpi">New this month<strong>83</strong><span>↑ 12.4%</span></div><div class="kpi">Renewal rate<strong>96.4%</strong><span>↑ 1.2pp</span></div></div><div class="chart-card"><div class="chart"><div class="chart-head"><strong>New policies · last 30 days</strong><span class="chart-currency">HK$</span></div><svg class="chart-line" viewBox="0 0 760 160" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="dashArea" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2f7cff" stop-opacity=".24"/><stop offset="1" stop-color="#2f7cff" stop-opacity=".02"/></linearGradient></defs><g stroke="#e8edf5" stroke-width="1"><path d="M70 6V148M150 6V148M230 6V148M310 6V148M390 6V148M470 6V148M550 6V148M630 6V148M710 6V148"/></g><path d="M70 122L100 108L132 114L166 94L202 100L238 74L272 80L306 52L340 58L374 36L410 42L444 28L480 36L516 20L552 42L590 30L628 16L664 24L706 12L706 148L70 148Z" fill="url(#dashArea)"/><path d="M70 122L100 108L132 114L166 94L202 100L238 74L272 80L306 52L340 58L374 36L410 42L444 28L480 36L516 20L552 42L590 30L628 16L664 24L706 12" fill="none" stroke="#2f7cff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="policy-mix"><strong>Policy mix</strong><p>Life & Savings</p><div class="mix-bar"><span style="width:86%"></span></div><p>Critical Illness</p><div class="mix-bar"><span style="width:42%;background:#10b981"></span></div><p>Medical</p><div class="mix-bar"><span style="width:27%;background:#f59e0b"></span></div><p>Other</p><div class="mix-bar"><span style="width:18%;background:#94a3b8"></span></div></div></div></main>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="platform">
+    <div class="inner">
+      <p class="eyebrow">Platform</p>
+      <h2>One workspace, the entire <span class="blue">policy lifecycle.</span></h2>
+      <div class="capability-grid">
+        <article class="capability"><div class="badge">1</div><h3>LifeBee CRM</h3><p>Client onboarding, FNA, e-signature, KYC. Mobile + web, in sync.</p></article>
+        <article class="capability"><div class="badge">2</div><h3>LifeBee EBA</h3><p>E-Business Application — application to issuance, paperless.</p></article>
+        <article class="capability"><div class="badge">3</div><h3>LifeBee POS</h3><p>Policy admin & service, renewals, claims, commissions.</p></article>
+        <article class="capability"><div class="badge">4</div><h3>LifeBee BI</h3><p>Realtime dashboards across firm performance.</p></article>
+        <article class="capability"><div class="badge">5</div><h3>Bee AI Broker</h3><p>RAG/KAG engine — compare approved product categories in seconds.</p></article>
+        <article class="capability"><div class="badge">6</div><h3>LifeBee Quote</h3><p>Multi-insurer quoting & illustration in one click.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="security">
+    <div class="inner split">
+      <div><p class="eyebrow">Security</p><h2>Security by design.<br>Built for trust.</h2><p class="lead">Hong Kong residency options, encryption, role control, and audit trail patterns for regulated broker workflows.</p></div>
+      <div class="security-grid">
+        <article class="security-card"><h3>HK PDPO</h3><p>Full compliance, all data resides in Hong Kong.</p></article>
+        <article class="security-card"><h3>ISO 27001</h3><p>ISO 27001 readiness work in progress.</p></article>
+        <article class="security-card"><h3>Encryption</h3><p>AES-256 at rest, TLS 1.3 in flight.</p></article>
+        <article class="security-card"><h3>Audit trail</h3><p>Every read/write signed, 7-year retention.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="customers">
+    <div class="inner">
+      <p class="eyebrow">Customers</p>
+      <h2>150+ broker firms. <span class="muted">One trusted backbone.</span></h2>
+      <div class="quote-grid">
+        <article class="quote-card"><blockquote>"3-min proposals replaced 3-hour spreadsheets. We doubled new-client capacity."</blockquote><p>Director, mid-size HK broker firm</p></article>
+        <article class="quote-card"><blockquote>"95% renewal rate isn't marketing — it's a year-on-year audit number."</blockquote><p>COO, bancassurance group</p></article>
+        <article class="quote-card"><blockquote>"The AI catches policy mismatches our junior advisors used to miss."</blockquote><p>Head of Compliance, MPF firm</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="inner">
+      <div class="section-head">
+        <div><p class="eyebrow awards-eyebrow">Awards & Credentials</p><h2><span class="blue">2017</span> · Hong Kong InsurTech, recognised.</h2></div>
+        <p>Founded in Hong Kong and focused on insurance workflow digitisation for broker teams and ecosystem partners.</p>
+      </div>
+      <div class="awards-grid">
+        <article class="award-card"><img src="public/assets/award-hkstp.png" alt="HKSTP InnoCentre Resident"><p>HKSTP InnoCentre Resident</p></article>
+        <article class="award-card"><img src="public/assets/award-itc-tvp.png" alt="ITC TVP Qualified Vendor"><p>ITC TVP Qualified Vendor</p></article>
+        <article class="award-card"><img src="public/assets/award-ict-2020.png" alt="HK ICT Awards 2020"><p>HK ICT Awards 2020</p></article>
+        <article class="award-card"><img src="public/assets/award-cloud-programme.png" alt="Cloud ecosystem programme"><p>Cloud ecosystem programme</p></article>
+        <article class="award-card"><img src="public/assets/award-dbiz.png" alt="Government D-Biz Vendor"><p>Government D-Biz Vendor</p></article>
+        <article class="award-card"><img src="public/assets/award-accelerator-finalist.png" alt="Accelerator programme finalist"><p>Accelerator programme · Finalist</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="company">
+    <div class="inner split">
+      <div><p class="eyebrow">Company</p><h2>From HKSTP InnoCentre, since 2017.</h2></div>
+      <div><p class="company-copy">BeeFintech builds insurance workflow technology for broker teams and ecosystem partners. This demo site presents the product vision, interaction model, and public-facing conversion flow.</p><div class="company-facts"><div><div class="fact-label">HQ</div>Unit 505, InnoCentre, Kowloon Tong</div><div><div class="fact-label">Founded</div>2017</div><div><div class="fact-label">Team</div>40+ engineers & insurance experts</div><div><div class="fact-label">Ecosystem</div>Insurance, technology, and operations partners</div></div></div>
+    </div>
+  </section>
+
+  <section class="cta" id="book-demo">
+    <h2>Ready to see Bee AI in your brokerage workflow?</h2>
+    <div class="actions" style="margin-top:0"><a class="btn btn-primary" href="#ai-broker">Try Bee AI →</a><a class="btn btn-secondary" href="#book-demo">Book a demo</a></div>
+  </section>
+
+  <div class="footer" style="border-top:1px solid var(--line);background:#f8fbff;color:#5b677a">Demo content shown for illustration only. Not insurance, investment, or product advice. Public demo data is not a production service claim.</div>
+  <footer class="footer">
+    <span><i class="footer-dot"></i>HK PDPO compliant</span><span><i class="footer-dot" style="background:#ef4444"></i>All data in Hong Kong</span><span><i class="footer-dot" style="background:#f59e0b"></i>ISO 27001 in progress</span><span><i class="footer-dot" style="background:#22c55e"></i>Demo content only</span><span><i class="footer-dot"></i>Static demo · no production claim</span><span>Team 06 · 绝对王者</span>
+  </footer>
+  <div class="modal-backdrop" id="demoModal" aria-hidden="true">
+    <div class="demo-modal" role="dialog" aria-modal="true" aria-labelledby="demoModalTitle">
+      <div class="modal-head">
+        <h3 id="demoModalTitle">Book a demo</h3>
+        <button class="modal-close" type="button" aria-label="Close demo form">×</button>
+      </div>
+      <form class="demo-form compact" id="demoForm">
+        <label class="form-field"><span class="field-label">Name <span class="required">*</span></span><input type="text" name="name" placeholder="Enter your name" required></label>
+        <label class="form-field"><span class="field-label">Mobile number <span class="required">*</span></span><input type="tel" name="phone" placeholder="Enter mobile number" required></label>
+        <label class="form-field"><span class="field-label">Email address <span class="required">*</span></span><input type="email" name="email" placeholder="Enter email address" required></label>
+        <button class="submit-demo" type="submit">Submit demo request →</button>
+        <div class="demo-error" id="demoError" aria-live="polite"></div>
+      </form>
+      <div class="demo-success" id="demoSuccess" aria-live="polite">
+        <div class="success-icon">✓</div>
+        <p>We have received your booking request. We will contact you within one business day.</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    const translations = {
+      "zh-Hans": {
+        
+        "Home": "首页","Platform": "平台",
+        "AI Broker": "AI 经纪助手",
+        "Security": "安全",
+        "Customers": "客户",
+        "Company": "公司",
+        "Book a demo": "预约演示",
+        "Built for Hong Kong insurance brokerage teams": "为香港保险经纪团队打造",
+        "The InsurTech": "香港经纪人信赖的",
+        "platform Hong Kong's": "保险科技平台",
+        "brokers": "",
+        "trust.": "trust.",
+        "Nine years. 150+ broker firms. 130+ insurers. Zero breaches. 95% of customers renew, every year.": "九年沉淀。150+ 经纪公司。130+ 保险公司。零数据泄露。客户年续约率 95%。",
+        "Try Bee AI — no signup →": "试用 Bee AI — 无需注册 →",
+        "Try Bee AI →": "试用 Bee AI →",
+        "Trust, in numbers": "信任，来自数字",
+        "deployment option": "年度续约率",
+        "data residency ready": "零数据泄露",
+        "shared-code architecture": "长期寿险经纪份额",
+        "AI workflow preview": "专业人士每日使用 AI",
+        "Built for": "适用场景",
+        "Broker operations": "经纪业务运营",
+        "Private deployment": "私有化部署",
+        "Policy lifecycle": "保单生命周期",
+        "AI workflow demo": "AI 工作流演示",
+        "Data residency": "数据驻留",
+        "Audit trail": "审计记录",
+        "Integration-ready": "可对接集成",
+        "Try it now": "立即试用",
+        "Don't\u00a0take\u00a0our\u00a0word\u00a0for\u00a0it.": "别只听我们说。",
+        "Try our AI.": "试试我们的 AI。",
+        "A guided aichatbot demo for broker workflows. Free to try, anonymous, and designed for public website evaluation.": "三个在线演示，免费、匿名。与 Demo 保险专业人士每天使用的是同一套 AI 引擎。",
+        "Bee AI · ready": "Bee AI · 就绪",
+        "Credits": "额度",
+        "Compare products": "比较产品",
+        "Workflow summary": "生成流程摘要",
+        "Visualize a scenario": "可视化方案",
+        "Ask Bee anything": "向 Bee 提问",
+        "You": "你",
+        "Enter your question. Example: I'm 35, want retirement protection, budget HK$5,000/month. Compare 2-3 options.": "请输入您的问题 示例：我 35 岁，希望配置退休保障，预算每月 HK$5,000。比较 2-3 个选项。",
+        "I'm 35, want retirement protection, budget HK$5,000/month. Compare 2-3 options.": "我 35 岁，希望配置退休保障，预算每月 HK$5,000。比较 2-3 个选项。",
+        "fit score": "匹配分",
+        "No data stored": "不储存数据",
+        "🔒 No data stored": "🔒 不储存数据",
+        "The product · Mobile + Web in sync": "产品 · 手机与网页同步",
+        "From client onboarding": "从客户开户",
+        "to electronic signature.": "到电子签名。",
+        "FNA · onboarding · underwriting support · servicing · settlement — the workflow chain on one phone, mirrored on a manager-grade web console.": "FNA、流程摘要、AML、核保、结算，全流程在手机端完成，并同步到经理级网页控制台。20 万+ 香港专业人士日常使用。",
+        "Completed": "已完成",
+        "Basic Information": "基本资料",
+        "Financial Needs Analysis": "财务需要分析",
+        "Product Introduction & Selection": "产品介绍与选择",
+        "E-Signature": "电子签名",
+        "Form Selection": "表格选择",
+        "Done": "完成",
+        "Signed": "已签署",
+        "FNA Overview": "FNA 总览",
+        "Five-step FNA, signed-and-locked. PIBA-2023 aligned, 7-year audit log.": "五步 FNA，签署后锁定。符合 PIBA-2023，保留 7 年审计记录。",
+        "AI Assist": "AI 流程摘要",
+        "Last 19 min": "过去 19 分钟",
+        "Age 35, married, 2 kids": "35 岁，已婚，2 个孩子",
+        "Budget HK$ 5,000/mo · Retirement": "预算 HK$5,000/月 · 退休",
+        "View workflow summary": "查看流程摘要",
+        "Illustrative AI assistance for comparing product categories and next-step workflow.": "用于演示产品类别比较和下一步流程提醒的 AI 辅助。",
+        "Policies": "保单",
+        "Renewals due": "待续保",
+        "Underwriting": "核保",
+        "Opening": "开户",
+        "Policy Dashboard": "保单仪表盘",
+        "AUM, renewals, underwriting, commission — refreshed in real time.": "AUM、续保、核保、佣金实时刷新。",
+        "Web Console": "网页控制台",
+        "Brokerage HQ in your browser.": "浏览器里的经纪公司总部。",
+        "Real-time policy dashboard, commission settlement, and performance analytics for the whole team — synced with every phone.": "实时保单仪表盘、佣金结算与团队绩效分析，并与每台手机同步。",
+        "daily policy capacity": "每日保单处理能力",
+        "data sources unified": "数据源统一",
+        "process automation": "流程自动化",
+        "Dashboard": "仪表盘",
+        "Clients": "客户",
+        "FNA & Workflows": "FNA 与流程摘要",
+        "Commissions": "佣金",
+        "Analytics": "分析",
+        "NEW": "新",
+        "2026 Q4 · New hour": "2026 Q4 · 新时段",
+        "Active policies": "有效保单",
+        "New this month": "本月新增",
+        "Renewal rate": "续约率",
+        "New policies · last 30 days": "过去 30 天新增保单",
+        "Policy mix": "保单组合",
+        "Life & Savings": "人寿与储蓄",
+        "Critical Illness": "危疾",
+        "Medical": "医疗",
+        "Other": "其他",
+        "One workspace, the entire": "一个工作空间，覆盖完整",
+        "policy lifecycle.": "保单生命周期。",
+        "Client onboarding, FNA, e-signature, KYC. Mobile + web, in sync.": "客户开户、FNA、电子签名、KYC。手机与网页同步。",
+        "E-Business Application — application to issuance, paperless.": "电子业务申请，从流程摘要到出单，全程无纸化。",
+        "Policy admin & service, renewals, claims, commissions.": "保单管理与服务、续保、理赔、佣金。",
+        "Realtime dashboards across firm performance.": "公司绩效实时仪表盘。",
+        "RAG/KAG engine — compare approved product categories in seconds.": "RAG/KAG 引擎，数秒比较已授权产品类别。",
+        "Multi-insurer quoting & illustration in one click.": "一键完成多保险公司报价与说明。",
+        "Eight years.": "八年。",
+        "Security by design.": "以安全为设计原则。",
+        "Hong Kong residency options, encryption, role control, and audit trail patterns for regulated broker workflows.": "可选香港数据驻留、加密、权限控制与审计记录模式。",
+        "Full compliance, all data resides in Hong Kong.": "全面合规，所有数据驻留香港。",
+        "ISO 27001 readiness work in progress.": "ISO 27001 准备工作推进中。",
+        "AES-256 at rest, TLS 1.3 in flight.": "静态 AES-256 加密，传输 TLS 1.3。",
+        "Audit trail": "审计记录",
+        "Every read/write signed, 7-year retention.": "每次读写均签名，保留 7 年。",
+        "150+ broker firms.": "150+ 经纪公司。",
+        "\"3-min proposals replaced 3-hour spreadsheets. We doubled new-client capacity.\"": "“3 分钟建议书替代了 3 小时表格。我们的新客承接能力翻倍了。”",
+        "Director, mid-size HK broker firm": "香港中型经纪公司董事",
+        "\"95% renewal rate isn't marketing — it's a year-on-year audit number.\"": "“95% 续约率不是营销话术，而是逐年审计数字。”",
+        "COO, bancassurance group": "银行保险集团 COO",
+        "Head of Compliance, MPF firm": "MPF 公司合规负责人",
+        "Broker teams.": "经纪团队。",
+        "One trusted backbone.": "同一个可信底座。",
+        "Client operations run from one shared workspace.": "客户导入、服务和保单运营可在同一个共享工作区中管理。",
+        "Use case · Operations team": "香港中型经纪公司董事",
+        "Structured workflows help teams reduce manual follow-up and improve renewal visibility.": "结构化工作流帮助团队减少人工跟进，并提升续保可见性。",
+        "Use case · Management team": "银行保险集团 COO",
+        "\"The AI catches policy mismatches our junior advisors used to miss.\"": "“AI 能发现初级顾问过去容易漏掉的保单不匹配。”",
+        "Use case · Compliance team": "MPF 公司合规负责人",
+        "Awards & Credentials": "奖项与资质",
+        "2017": "2017",
+        "· Hong Kong InsurTech, recognised.": " · 获认可的香港保险科技。",
+        "Founded in Hong Kong and focused on insurance workflow digitisation for broker teams and ecosystem partners.": "专注为保险经纪团队和生态伙伴提供保险工作流数字化能力。",
+        "From HKSTP InnoCentre, since 2017.": "2017 年起，来自 HKSTP InnoCentre。",
+        "BeeFintech builds insurance workflow technology for broker teams and ecosystem partners. This demo site presents the product vision, interaction model, and public-facing conversion flow.": "BeeFintech 为保险经纪团队和生态伙伴建设保险工作流技术。此演示站展示产品愿景、交互模型和预约转化流程。",
+        "HQ": "总部",
+        "Unit 505, InnoCentre, Kowloon Tong": "九龙塘 InnoCentre 505 室",
+        "Founded": "成立",
+        "Team": "团队",
+        "40+ engineers & insurance experts": "40+ 工程师与保险专家",
+        "Backed by": "支持方",
+        "Ready to see Bee AI in your brokerage workflow?": "准备看看 Bee AI 如何服务你的业务组合了吗？",
+        "Name": "姓名",
+        "Company name": "公司名称",
+        "Position": "职位",
+        "Mobile number": "手机号",
+        "Email address": "邮箱地址",
+        "Product module": "关注产品模块",
+        "Remarks": "备注",
+        "Enter your name": "请输入您的姓名",
+        "Enter company name": "请输入公司名称",
+        "Enter your position": "请输入您的职位",
+        "Enter mobile number": "请输入手机号",
+        "Enter email address": "请输入邮箱地址",
+        "Select product module": "请选择关注产品模块",
+        "Tell us your needs or questions": "请输入您的需求或问题",
+        "Submit demo request →": "提交预约申请 →",
+        "We have received your booking request. We will contact you within one business day.": "已收到您的预约，我们会在一个工作日内联系您。",
+        "Submitting...": "提交中...",
+        "Submission failed. Please try again or contact us directly.": "提交失败，请稍后重试或直接联系我们。",
+        "The booking service did not confirm success. Please try again.": "预约服务未确认提交成功，请重试。",
+        "HK PDPO compliant": "符合香港 PDPO",
+        "All data in Hong Kong": "所有数据位于香港",
+        "ISO 27001 in progress": "ISO 27001 推进中",
+        "Demo content only": "仅作演示内容",
+        "Static demo · no production claim": "静态演示 · 非生产承诺"
+      },
+      "zh-Hant": {
+        
+        "Home": "首頁","Platform": "平台",
+        "AI Broker": "AI 經紀助手",
+        "Security": "安全",
+        "Customers": "客戶",
+        "Company": "公司",
+        "Book a demo": "預約演示",
+        "Built for Hong Kong insurance brokerage teams": "為香港保險經紀團隊打造",
+        "The InsurTech": "香港經紀人信賴的",
+        "platform Hong Kong's": "保險科技平台",
+        "brokers": "",
+        "trust.": "trust.",
+        "Nine years. 150+ broker firms. 130+ insurers. Zero breaches. 95% of customers renew, every year.": "九年沉澱。150+ 經紀公司。130+ 保險公司。零資料外洩。客戶年續約率 95%。",
+        "Try Bee AI — no signup →": "試用 Bee AI — 無需註冊 →",
+        "Try Bee AI →": "試用 Bee AI →",
+        "Trust, in numbers": "信任，來自數字",
+        "deployment option": "年度續約率",
+        "data residency ready": "零資料外洩",
+        "shared-code architecture": "長期壽險經紀份額",
+        "AI workflow preview": "專業人士每日使用 AI",
+        "Built for": "適用場景",
+        "Broker operations": "經紀業務營運",
+        "Private deployment": "私有化部署",
+        "Policy lifecycle": "保單生命週期",
+        "AI workflow demo": "AI 工作流演示",
+        "Data residency": "資料駐留",
+        "Audit trail": "審計記錄",
+        "Integration-ready": "可對接整合",
+        "Try it now": "立即試用",
+        "Don't\u00a0take\u00a0our\u00a0word\u00a0for\u00a0it.": "別只聽我們說。",
+        "Try our AI.": "試試我們的 AI。",
+        "A guided aichatbot demo for broker workflows. Free to try, anonymous, and designed for public website evaluation.": "三個線上演示，免費、匿名。與 Demo 保險專業人士每天使用的是同一套 AI 引擎。",
+        "Bee AI · ready": "Bee AI · 就緒",
+        "Credits": "額度",
+        "Compare products": "比較產品",
+        "Workflow summary": "生成流程摘要",
+        "Visualize a scenario": "可視化方案",
+        "Ask Bee anything": "向 Bee 提問",
+        "You": "你",
+        "Enter your question. Example: I'm 35, want retirement protection, budget HK$5,000/month. Compare 2-3 options.": "請輸入您的問題 示例：我 35 歲，希望配置退休保障，預算每月 HK$5,000。比較 2-3 個選項。",
+        "I'm 35, want retirement protection, budget HK$5,000/month. Compare 2-3 options.": "我 35 歲，希望配置退休保障，預算每月 HK$5,000。比較 2-3 個選項。",
+        "fit score": "匹配分",
+        "No data stored": "不儲存資料",
+        "🔒 No data stored": "🔒 不儲存資料",
+        "The product · Mobile + Web in sync": "產品 · 手機與網頁同步",
+        "From client onboarding": "從客戶開戶",
+        "to electronic signature.": "到電子簽名。",
+        "FNA · onboarding · underwriting support · servicing · settlement — the workflow chain on one phone, mirrored on a manager-grade web console.": "FNA、流程摘要、AML、核保、結算，全流程在手機端完成，並同步到經理級網頁控制台。20 萬+ 香港專業人士日常使用。",
+        "Completed": "已完成",
+        "Basic Information": "基本資料",
+        "Financial Needs Analysis": "財務需要分析",
+        "Product Introduction & Selection": "產品介紹與選擇",
+        "E-Signature": "電子簽名",
+        "Form Selection": "表格選擇",
+        "Done": "完成",
+        "Signed": "已簽署",
+        "FNA Overview": "FNA 總覽",
+        "Five-step FNA, signed-and-locked. PIBA-2023 aligned, 7-year audit log.": "五步 FNA，簽署後鎖定。符合 PIBA-2023，保留 7 年審計記錄。",
+        "AI Assist": "AI 流程摘要",
+        "Last 19 min": "過去 19 分鐘",
+        "Age 35, married, 2 kids": "35 歲，已婚，2 個孩子",
+        "Budget HK$ 5,000/mo · Retirement": "預算 HK$5,000/月 · 退休",
+        "View workflow summary": "匯出 PDF 流程摘要",
+        "Illustrative AI assistance for comparing product categories and next-step workflow.": "用於演示產品類別比較和下一步流程提醒的 AI 輔助。",
+        "Policies": "保單",
+        "Renewals due": "待續保",
+        "Underwriting": "核保",
+        "Opening": "開戶",
+        "Policy Dashboard": "保單儀表板",
+        "AUM, renewals, underwriting, commission — refreshed in real time.": "AUM、續保、核保、佣金即時刷新。",
+        "Web Console": "網頁控制台",
+        "Brokerage HQ in your browser.": "瀏覽器裏的經紀公司總部。",
+        "Real-time policy dashboard, commission settlement, and performance analytics for the whole team — synced with every phone.": "即時保單儀表板、佣金結算與團隊績效分析，並與每部手機同步。",
+        "daily policy capacity": "每日保單處理能力",
+        "data sources unified": "資料源統一",
+        "process automation": "流程自動化",
+        "Dashboard": "儀表板",
+        "Clients": "客戶",
+        "FNA & Workflows": "FNA 與流程摘要",
+        "Commissions": "佣金",
+        "Analytics": "分析",
+        "NEW": "新",
+        "2026 Q4 · New hour": "2026 Q4 · 新時段",
+        "Active policies": "有效保單",
+        "New this month": "本月新增",
+        "Renewal rate": "續約率",
+        "New policies · last 30 days": "過去 30 天新增保單",
+        "Policy mix": "保單組合",
+        "Life & Savings": "人壽與儲蓄",
+        "Critical Illness": "危疾",
+        "Medical": "醫療",
+        "Other": "其他",
+        "One workspace, the entire": "一個工作空間，覆蓋完整",
+        "policy lifecycle.": "保單生命週期。",
+        "Client onboarding, FNA, e-signature, KYC. Mobile + web, in sync.": "客戶開戶、FNA、電子簽名、KYC。手機與網頁同步。",
+        "E-Business Application — application to issuance, paperless.": "電子業務申請，從申請到出單，全程無紙化。",
+        "Policy admin & service, renewals, claims, commissions.": "保單管理與服務、續保、理賠、佣金。",
+        "Realtime dashboards across firm performance.": "公司績效即時儀表板。",
+        "RAG/KAG engine — compare approved product categories in seconds.": "RAG/KAG 引擎，數秒比較已授權產品類別。",
+        "Multi-insurer quoting & illustration in one click.": "一鍵完成多保險公司報價與說明。",
+        "Eight years.": "八年。",
+        "Security by design.": "以安全為設計原則。",
+        "Hong Kong residency options, encryption, role control, and audit trail patterns for regulated broker workflows.": "可選香港資料駐留、加密、權限控制與審計記錄模式。",
+        "Full compliance, all data resides in Hong Kong.": "全面合規，所有資料駐留香港。",
+        "ISO 27001 readiness work in progress.": "ISO 27001 準備工作推進中。",
+        "AES-256 at rest, TLS 1.3 in flight.": "靜態 AES-256 加密，傳輸 TLS 1.3。",
+        "Audit trail": "審計記錄",
+        "Every read/write signed, 7-year retention.": "每次讀寫均簽名，保留 7 年。",
+        "150+ broker firms.": "150+ 經紀公司。",
+        "\"3-min proposals replaced 3-hour spreadsheets. We doubled new-client capacity.\"": "“3 分鐘建議書替代了 3 小時表格。我們的新客承接能力翻倍了。”",
+        "Director, mid-size HK broker firm": "香港中型經紀公司董事",
+        "\"95% renewal rate isn't marketing — it's a year-on-year audit number.\"": "“95% 續約率不是行銷話術，而是逐年審計數字。”",
+        "COO, bancassurance group": "銀行保險集團 COO",
+        "Head of Compliance, MPF firm": "MPF 公司合規負責人",
+        "Broker teams.": "經紀團隊。",
+        "One trusted backbone.": "同一個可信底座。",
+        "Client operations run from one shared workspace.": "客戶導入、服務和保單營運可在同一個共享工作區中管理。",
+        "Use case · Operations team": "香港中型經紀公司董事",
+        "Structured workflows help teams reduce manual follow-up and improve renewal visibility.": "結構化工作流幫助團隊減少人工跟進，並提升續保可見性。",
+        "Use case · Management team": "銀行保險集團 COO",
+        "\"The AI catches policy mismatches our junior advisors used to miss.\"": "「AI 能發現初級顧問過去容易漏掉的保單不匹配。」",
+        "Use case · Compliance team": "MPF 公司合規負責人",
+        "Awards & Credentials": "獎項與資質",
+        "· Hong Kong InsurTech, recognised.": " · 獲認可的香港保險科技。",
+        "Founded in Hong Kong and focused on insurance workflow digitisation for broker teams and ecosystem partners.": "專注為保險經紀團隊和生態夥伴提供保險工作流數字化能力。",
+        "From HKSTP InnoCentre, since 2017.": "2017 年起，來自 HKSTP InnoCentre。",
+        "BeeFintech builds insurance workflow technology for broker teams and ecosystem partners. This demo site presents the product vision, interaction model, and public-facing conversion flow.": "BeeFintech 為保險經紀團隊和生態夥伴建設保險工作流技術。此演示站展示產品願景、交互模型和預約轉化流程。",
+        "HQ": "總部",
+        "Unit 505, InnoCentre, Kowloon Tong": "九龍塘 InnoCentre 505 室",
+        "Founded": "成立",
+        "Team": "團隊",
+        "40+ engineers & insurance experts": "40+ 工程師與保險專家",
+        "Backed by": "支持方",
+        "Ready to see Bee AI in your brokerage workflow?": "準備看看 Bee AI 如何服務你的業務組合了嗎？",
+        "Name": "姓名",
+        "Company name": "公司名稱",
+        "Position": "職位",
+        "Mobile number": "手機號",
+        "Email address": "電郵地址",
+        "Product module": "關注產品模組",
+        "Remarks": "備註",
+        "Enter your name": "請輸入您的姓名",
+        "Enter company name": "請輸入公司名稱",
+        "Enter your position": "請輸入您的職位",
+        "Enter mobile number": "請輸入手機號",
+        "Enter email address": "請輸入電郵地址",
+        "Select product module": "請選擇關注產品模組",
+        "Tell us your needs or questions": "請輸入您的需求或問題",
+        "Submit demo request →": "提交預約申請 →",
+        "We have received your booking request. We will contact you within one business day.": "已收到您的預約，我們會在一個工作日內聯絡您。",
+        "Submitting...": "提交中...",
+        "Submission failed. Please try again or contact us directly.": "提交失敗，請稍後重試或直接聯絡我們。",
+        "The booking service did not confirm success. Please try again.": "預約服務未確認提交成功，請重試。",
+        "HK PDPO compliant": "符合香港 PDPO",
+        "All data in Hong Kong": "所有資料位於香港",
+        "ISO 27001 in progress": "ISO 27001 推進中",
+        "Demo content only": "僅作演示內容",
+        "Static demo · no production claim": "靜態演示 · 非生產承諾"
+      }
+    };
+
+    const languageLabels = {
+      en: "EN · 繁中",
+      "zh-Hans": "简中 · EN",
+      "zh-Hant": "繁中 · EN"
+    };
+
+    const heroTitleHtml = {
+      "zh-Hans": "香港经纪人<br>信赖的保险科技<br><span class=\"blue\">平台。</span>",
+      "zh-Hant": "香港經紀人<br>信賴的保險科技<br><span class=\"blue\">平台。</span>"
+    };
+
+    const originalText = new WeakMap();
+    const translatableNodes = [];
+    const translatableAttributes = [];
+
+    function collectTextNodes(root) {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+          if (node.parentElement && node.parentElement.closest("script, style")) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      let node = walker.nextNode();
+      while (node) {
+        originalText.set(node, node.nodeValue);
+        translatableNodes.push(node);
+        node = walker.nextNode();
+      }
+    }
+
+    function translateNode(node, lang) {
+      const source = originalText.get(node);
+      const key = source.trim();
+      const translated = translations[lang] && translations[lang][key];
+      if (!translated) {
+        node.nodeValue = source;
+        return;
+      }
+      node.nodeValue = source.replace(key, translated);
+    }
+
+    function collectTranslatableAttributes(root) {
+      root.querySelectorAll("[placeholder]").forEach((element) => {
+        translatableAttributes.push({
+          element,
+          name: "placeholder",
+          value: element.getAttribute("placeholder")
+        });
+      });
+    }
+
+    function translateAttributes(lang) {
+      translatableAttributes.forEach((item) => {
+        const translated = translations[lang] && translations[lang][item.value];
+        item.element.setAttribute(item.name, translated || item.value);
+      });
+    }
+
+    function setLanguage(lang) {
+      const nextLang = translations[lang] ? lang : "en";
+      document.documentElement.lang = nextLang;
+      translatableNodes.forEach((node) => translateNode(node, nextLang));
+      translateAttributes(nextLang);
+      const heroTitle = document.querySelector(".hero h1");
+      if (heroTitle) {
+        heroTitle.innerHTML = nextLang === "en" ? heroTitle.dataset.originalHtml : heroTitleHtml[nextLang];
+      }
+      document.querySelector(".language-toggle").textContent = languageLabels[nextLang];
+      document.querySelectorAll("[data-lang-choice]").forEach((button) => {
+        button.classList.toggle("active", button.dataset.langChoice === nextLang);
+      });
+      localStorage.setItem("beefintech_lang", nextLang);
+      refreshDefaultQuestionsForLanguage();
+      syncAiModeView();
+    }
+
+    const heroTitle = document.querySelector(".hero h1");
+    if (heroTitle) heroTitle.dataset.originalHtml = heroTitle.innerHTML;
+
+    collectTextNodes(document.body);
+    collectTranslatableAttributes(document.body);
+
+    const languageSwitcher = document.getElementById("languageSwitcher");
+    const languageToggle = languageSwitcher.querySelector(".language-toggle");
+    const demoModal = document.getElementById("demoModal");
+    const demoForm = document.getElementById("demoForm");
+    const demoSuccess = document.getElementById("demoSuccess");
+    const demoError = document.getElementById("demoError");
+    const demoSubmit = demoForm.querySelector(".submit-demo");
+    const bookingApiUrl = "https://api.lifebee.tech/api/v3/gateway/booking";
+    const bookingSubmitText = "Submit demo request →";
+    let isSubmittingBooking = false;
+    const chatForm = document.getElementById("chatForm");
+    const chatCard = document.querySelector(".demo-card");
+    const chatQuestion = document.getElementById("chatQuestion");
+    const chatCredits = document.getElementById("chatCredits");
+    const chatAnswer = document.getElementById("chatAnswer");
+    const chatAnswerLabel = document.getElementById("chatAnswerLabel");
+    const chatCreditKey = "beefintech_bee_ai_credits";
+    let activeAiMode = "compare";
+    let isSubmittingChat = false;
+
+    function getChatCredits() {
+      const raw = localStorage.getItem(chatCreditKey);
+      if (raw === null) return 3;
+      const stored = Number(raw);
+      return Number.isFinite(stored) && stored >= 0 && stored <= 3 ? stored : 3;
+    }
+
+    function setChatCredits(value) {
+      const credits = Math.max(0, Math.min(3, value));
+      localStorage.setItem(chatCreditKey, String(credits));
+      chatCredits.textContent = `${credits} / 3`;
+      syncChatSubmitState();
+    }
+
+    function autoSizeChatInput() {
+      chatQuestion.style.height = "auto";
+      chatQuestion.style.height = `${chatQuestion.scrollHeight}px`;
+    }
+
+    function openDemoModal() {
+      demoModal.classList.add("open");
+      demoModal.setAttribute("aria-hidden", "false");
+      demoForm.classList.remove("hidden");
+      demoSuccess.classList.remove("visible");
+      demoError.classList.remove("visible");
+      demoError.textContent = "";
+      demoSubmit.disabled = false;
+      demoSubmit.textContent = translateText(bookingSubmitText);
+      demoForm.reset();
+      const firstInput = demoForm.querySelector("input");
+      if (firstInput) firstInput.focus();
+    }
+
+    function closeDemoModal() {
+      demoModal.classList.remove("open");
+      demoModal.setAttribute("aria-hidden", "true");
+    }
+
+    document.querySelectorAll('a[href="#book-demo"]').forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        openDemoModal();
+      });
+    });
+
+    function translateText(key) {
+      const lang = translations[document.documentElement.lang] ? document.documentElement.lang : "en";
+      return (translations[lang] && translations[lang][key]) || key;
+    }
+
+    function normaliseBookingPayload(form) {
+      const data = Object.fromEntries(new FormData(form).entries());
+      return {
+        name: String(data.name || "").trim(),
+        phone: String(data.phone || "").trim(),
+        email: String(data.email || "").trim()
+      };
+    }
+
+    function isBookingSuccess(payload) {
+      return Boolean(payload && (payload.data === true || payload.code === 1000));
+    }
+
+    async function submitBooking(payload) {
+      const body = new URLSearchParams(payload);
+      const response = await fetch(bookingApiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+        body
+      });
+      let result = null;
+      try {
+        result = await response.json();
+      } catch (error) {
+        result = null;
+      }
+      if (!response.ok || !isBookingSuccess(result)) {
+        throw new Error((result && result.message) || translateText("The booking service did not confirm success. Please try again."));
+      }
+      return result;
+    }
+
+    demoForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (isSubmittingBooking || !demoForm.reportValidity()) return;
+      const payload = normaliseBookingPayload(demoForm);
+      isSubmittingBooking = true;
+      demoError.classList.remove("visible");
+      demoError.textContent = "";
+      demoSubmit.disabled = true;
+      demoSubmit.textContent = translateText("Submitting...");
+      try {
+        await submitBooking(payload);
+        demoForm.classList.add("hidden");
+        demoSuccess.classList.add("visible");
+      } catch (error) {
+        demoError.textContent = error && error.message ? error.message : translateText("Submission failed. Please try again or contact us directly.");
+        demoError.classList.add("visible");
+      } finally {
+        isSubmittingBooking = false;
+        demoSubmit.disabled = false;
+        demoSubmit.textContent = translateText(bookingSubmitText);
+      }
+    });
+
+    demoModal.querySelector(".modal-close").addEventListener("click", closeDemoModal);
+
+    demoModal.addEventListener("click", (event) => {
+      if (event.target === demoModal) closeDemoModal();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && demoModal.classList.contains("open")) closeDemoModal();
+    });
+
+    const aiModes = ["compare", "visualize", "ask"];
+
+    const aiModeQuestions = {
+      en: {
+        compare: "I'm 35, want retirement protection, budget HK$5,000/month. Compare 2-3 options.",
+        visualize: "Visualize a simple retirement protection scenario for a 35-year-old client with a monthly HK$5,000 budget.",
+        ask: "Can Bee AI help my brokerage team answer client questions faster while keeping the workflow compliant?"
+      },
+      "zh-Hans": {
+        
+        "Home": "首页",compare: "我 35 岁，希望配置退休保障，预算每月 HK$5,000。比较 2-3 个选项。",
+        visualize: "请为一位 35 岁、每月预算 HK$5,000 的客户，可视化一个退休保障方案。",
+        ask: "Bee AI 能帮助我的经纪团队更快回答客户问题，同时保持流程合规吗？"
+      },
+      "zh-Hant": {
+        
+        "Home": "首頁",compare: "我 35 歲，希望配置退休保障，預算每月 HK$5,000。比較 2-3 個選項。",
+        visualize: "請為一位 35 歲、每月預算 HK$5,000 的客戶，可視化一個退休保障方案。",
+        ask: "Bee AI 能幫助我的經紀團隊更快回答客戶問題，同時保持流程合規嗎？"
+      }
+    };
+
+    const answerTemplates = {
+      en: {
+        compare: `
+          <div class="product-cards">
+            <div class="mini-card"><strong>Retirement Savings</strong><div class="muted">Illustrative range</div><div class="bar"><span style="width:78%"></span></div><div class="muted">fit score</div></div>
+            <div class="mini-card"><strong>Annuity Income</strong><div class="muted">Illustrative range</div><div class="bar"><span style="width:86%"></span></div><div class="muted">fit score</div></div>
+            <div class="mini-card"><strong>Whole-life Savings</strong><div class="muted">Illustrative range</div><div class="bar"><span style="width:64%"></span></div><div class="muted">fit score</div></div>
+          </div>`,
+        visualize: `
+          <div class="scenario-card">
+            <div class="scenario-line"><strong>Protection gap</strong><div class="scenario-bar"><span style="width:62%"></span></div></div>
+            <div class="scenario-line"><strong>Cash-flow fit</strong><div class="scenario-bar"><span style="width:74%"></span></div></div>
+            <div class="scenario-line"><strong>Retirement runway</strong><div class="scenario-bar"><span style="width:81%"></span></div></div>
+          </div>`,
+        ask: `
+          <div class="answer-chat">
+            <div class="answer-bubble user">Can Bee AI help my team compare options faster?</div>
+            <div class="answer-bubble">Yes. In this demo, Bee AI structures product-category comparisons, highlights fit signals, and suggests the next workflow step.</div>
+            <div class="answer-bubble">For production use, signed clients connect Bee AI Broker to their approved product library and compliance process.</div>
+          </div>`
+      },
+      "zh-Hans": {
+        
+        "Home": "首页",compare: `
+          <div class="product-cards">
+            <div class="mini-card"><strong>退休储蓄</strong><div class="muted">示例区间</div><div class="bar"><span style="width:78%"></span></div><div class="muted">匹配分</div></div>
+            <div class="mini-card"><strong>年金收入</strong><div class="muted">示例区间</div><div class="bar"><span style="width:86%"></span></div><div class="muted">匹配分</div></div>
+            <div class="mini-card"><strong>终身寿险储蓄</strong><div class="muted">示例区间</div><div class="bar"><span style="width:64%"></span></div><div class="muted">匹配分</div></div>
+          </div>`,
+        visualize: `
+          <div class="scenario-card">
+            <div class="scenario-line"><strong>保障缺口</strong><div class="scenario-bar"><span style="width:62%"></span></div></div>
+            <div class="scenario-line"><strong>现金流适配</strong><div class="scenario-bar"><span style="width:74%"></span></div></div>
+            <div class="scenario-line"><strong>退休路径</strong><div class="scenario-bar"><span style="width:81%"></span></div></div>
+          </div>`,
+        ask: `
+          <div class="answer-chat">
+            <div class="answer-bubble user">Bee AI 能帮助团队更快比较方案吗？</div>
+            <div class="answer-bubble">可以。在这个演示中，Bee AI 会整理产品类别对比、突出匹配信号，并建议下一步工作流。</div>
+            <div class="answer-bubble">在正式使用中，签约客户会把 Bee AI Broker 接入已批准的产品库和合规流程。</div>
+          </div>`
+      },
+      "zh-Hant": {
+        
+        "Home": "首頁",compare: `
+          <div class="product-cards">
+            <div class="mini-card"><strong>退休儲蓄</strong><div class="muted">示例區間</div><div class="bar"><span style="width:78%"></span></div><div class="muted">匹配分</div></div>
+            <div class="mini-card"><strong>年金收入</strong><div class="muted">示例區間</div><div class="bar"><span style="width:86%"></span></div><div class="muted">匹配分</div></div>
+            <div class="mini-card"><strong>終身壽險儲蓄</strong><div class="muted">示例區間</div><div class="bar"><span style="width:64%"></span></div><div class="muted">匹配分</div></div>
+          </div>`,
+        visualize: `
+          <div class="scenario-card">
+            <div class="scenario-line"><strong>保障缺口</strong><div class="scenario-bar"><span style="width:62%"></span></div></div>
+            <div class="scenario-line"><strong>現金流適配</strong><div class="scenario-bar"><span style="width:74%"></span></div></div>
+            <div class="scenario-line"><strong>退休路徑</strong><div class="scenario-bar"><span style="width:81%"></span></div></div>
+          </div>`,
+        ask: `
+          <div class="answer-chat">
+            <div class="answer-bubble user">Bee AI 能幫助團隊更快比較方案嗎？</div>
+            <div class="answer-bubble">可以。在這個演示中，Bee AI 會整理產品類別對比、突出匹配信號，並建議下一步工作流。</div>
+            <div class="answer-bubble">在正式使用中，簽約客戶會把 Bee AI Broker 接入已批准的產品庫和合規流程。</div>
+          </div>`
+      }
+    };
+
+    const chatModeState = Object.fromEntries(aiModes.map((mode) => [mode, { question: "", dirty: false, answered: false }]));
+
+    function getCurrentLang() {
+      return translations[document.documentElement.lang] ? document.documentElement.lang : "en";
+    }
+
+    function getDefaultQuestion(mode) {
+      const lang = getCurrentLang();
+      return (aiModeQuestions[lang] && aiModeQuestions[lang][mode]) || aiModeQuestions.en[mode] || aiModeQuestions.en.compare;
+    }
+
+    function refreshDefaultQuestionsForLanguage() {
+      aiModes.forEach((mode) => {
+        const state = chatModeState[mode];
+        if (!state.dirty) state.question = getDefaultQuestion(mode);
+      });
+    }
+
+    function hideAiAnswer() {
+      chatCard.classList.remove("answered");
+      chatAnswer.innerHTML = "";
+    }
+
+    function renderAiAnswer() {
+      const lang = getCurrentLang();
+      const templates = answerTemplates[lang] || answerTemplates.en;
+      chatAnswer.innerHTML = templates[activeAiMode] || templates.compare;
+      chatCard.classList.add("answered");
+    }
+
+    function syncAiModeView() {
+      if (!chatQuestion || !chatCard) return;
+      const state = chatModeState[activeAiMode];
+      if (!state.question) state.question = getDefaultQuestion(activeAiMode);
+      chatQuestion.value = state.question;
+      autoSizeChatInput();
+      if (state.answered) renderAiAnswer();
+      else hideAiAnswer();
+    }
+    function syncChatSubmitState() {
+      const remaining = getChatCredits();
+      const submit = chatForm.querySelector(".chat-submit");
+      if (submit) submit.textContent = remaining <= 0 ? "↗" : "→";
+    }
+
+    document.querySelectorAll(".demo-tabs .chip").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".demo-tabs .chip").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        activeAiMode = button.dataset.aiMode || "compare";
+        syncAiModeView();
+      });
+    });
+
+    chatQuestion.addEventListener("input", () => {
+      const state = chatModeState[activeAiMode];
+      state.question = chatQuestion.value;
+      state.dirty = chatQuestion.value !== getDefaultQuestion(activeAiMode);
+      autoSizeChatInput();
+    });
+
+    chatForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (isSubmittingChat) return;
+      const remaining = getChatCredits();
+      if (remaining <= 0) {
+        openDemoModal();
+        return;
+      }
+      const state = chatModeState[activeAiMode];
+      if (!chatQuestion.value.trim()) {
+        state.question = getDefaultQuestion(activeAiMode);
+        state.dirty = false;
+        chatQuestion.value = state.question;
+        autoSizeChatInput();
+      } else {
+        state.question = chatQuestion.value;
+      }
+      isSubmittingChat = true;
+      state.answered = true;
+      setChatCredits(remaining - 1);
+      renderAiAnswer();
+      window.setTimeout(() => { isSubmittingChat = false; }, 120);
+    });
+    languageToggle.addEventListener("click", () => {
+      const open = languageSwitcher.classList.toggle("open");
+      languageToggle.setAttribute("aria-expanded", String(open));
+    });
+
+    document.querySelectorAll("[data-lang-choice]").forEach((button) => {
+      button.addEventListener("click", () => {
+        setLanguage(button.dataset.langChoice);
+        languageSwitcher.classList.remove("open");
+        languageToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!languageSwitcher.contains(event.target)) {
+        languageSwitcher.classList.remove("open");
+        languageToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    const defaultLanguageResetKey = "beefintech_default_language_en_v1";
+    if (localStorage.getItem(defaultLanguageResetKey) !== "done") {
+      localStorage.setItem("beefintech_lang", "en");
+      localStorage.setItem(defaultLanguageResetKey, "done");
+    }
+
+    const chatCreditResetKey = "beefintech_bee_ai_credits_reset_v3";
+    if (localStorage.getItem(chatCreditResetKey) !== "done") {
+      localStorage.setItem(chatCreditKey, "3");
+      localStorage.setItem(chatCreditResetKey, "done");
+    }
+    refreshDefaultQuestionsForLanguage();
+    setLanguage(localStorage.getItem("beefintech_lang") || "en");
+    setChatCredits(getChatCredits());
+    window.addEventListener("storage", (event) => {
+      if (event.key === chatCreditKey) setChatCredits(getChatCredits());
+    });
+    autoSizeChatInput();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
