@@ -5,6 +5,18 @@
 - 静态资源：`src/public/assets/`
 - 部署方式：GitHub Pages workflow（见 `.github/workflows/pages.yml`）
 
+### 部署状态说明
+
+当前官网代码、GitHub Pages workflow 和 `gh-pages` 静态发布分支都已经提交到仓库；如果访问 `https://lifebee-vibe-coding.github.io/team-06/` 仍然显示 404，通常表示仓库尚未启用 GitHub Pages，或发布源尚未选择。
+
+由于普通成员没有仓库 Pages 设置权限，需要仓库管理员在 `Settings -> Pages` 中启用发布：
+
+- 推荐：`Deploy from a branch`
+- Branch：`gh-pages`
+- Folder：`/ root`
+
+保存后等待 1-3 分钟，官网地址应为：`https://lifebee-vibe-coding.github.io/team-06/`
+
 <!-- BEE-STATUS-START -->
 # Team · 进度仪表盘
 
