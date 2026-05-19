@@ -5,8 +5,8 @@
     "details": {
       "members_count": 3,
       "offices": [
-        "长沙",
-        "深圳"
+        "深圳",
+        "长沙"
       ]
     }
   },
@@ -49,7 +49,7 @@
   },
   "m7_plus": {
     "passed": true,
-    "message": "M7+ 通过：分支 ['feature/docs-grill-update', 'main']",
+    "message": "M7+ 通过：分支 ['feature/docs-grill-update', 'gh-pages', 'main']",
     "details": null
   },
   "m8a": {
