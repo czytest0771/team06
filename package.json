@@ -1,0 +1,13 @@
+{
+  "name": "team06-cloudflare-pages",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "build": "node scripts/build-cloudflare-pages.cjs",
+    "test": "node src/frontend/frontend.test.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
